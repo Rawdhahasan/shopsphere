@@ -2,7 +2,7 @@
 
 A full-stack e-commerce platform for modern home and lifestyle goods, with a premium customer storefront and a complete admin dashboard.
 
-> **Status:** in active development. Phase 1 (architecture, design system, database schema) is complete. See the [roadmap](#roadmap).
+> **Status:** in active development. Phases 1–2 (architecture, design system, database, seed data) are complete. See the [roadmap](#roadmap).
 > Payments run in **Stripe test mode only**. No real charges are ever made.
 
 ## Highlights
@@ -12,7 +12,8 @@ A full-stack e-commerce platform for modern home and lifestyle goods, with a pre
 - **Defence-in-depth security**: route proxy, server-side authorization, and Postgres **Row-Level Security** on every table
 - **Server-side pricing**: totals, discounts, shipping and tax are always recalculated on the server from database prices
 - **Safe payments**: Stripe Checkout with signature-verified, idempotent webhooks and atomic stock reservation
-- **Tested database rules**: 30+ tests run every migration in an in-memory Postgres and verify what each type of user can and can't do
+- **Tested database rules**: 45+ tests run every migration and the seed data in an in-memory Postgres and verify what each type of user can and can't do
+- **Realistic seed data**: 24 products with 49 variants, licensed photography, demo customers, orders and reviews
 
 ## Tech stack
 
@@ -50,30 +51,46 @@ The app starts without any credentials. Features that need Supabase or Stripe sw
 
 All variables are documented in [`.env.example`](.env.example).
 
-| Variable                               | Where it's used  | Secret?                       |
-| -------------------------------------- | ---------------- | ----------------------------- |
-| `NEXT_PUBLIC_SITE_URL`                 | Browser + server | No                            |
-| `NEXT_PUBLIC_SUPABASE_URL`             | Browser + server | No                            |
-| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY` | Browser + server | No (protected by RLS)         |
-| `SUPABASE_SECRET_KEY`                  | Server only      | **Yes**                       |
-| `STRIPE_SECRET_KEY`                    | Server only      | **Yes** (must be `sk_test_…`) |
-| `STRIPE_WEBHOOK_SECRET`                | Server only      | **Yes**                       |
+| Variable                                                        | Where it's used   | Secret?                       |
+| --------------------------------------------------------------- | ----------------- | ----------------------------- |
+| `NEXT_PUBLIC_SITE_URL`                                          | Browser + server  | No                            |
+| `NEXT_PUBLIC_SUPABASE_URL`                                      | Browser + server  | No                            |
+| `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`                          | Browser + server  | No (protected by RLS)         |
+| `SUPABASE_SECRET_KEY`                                           | Server only       | **Yes**                       |
+| `SUPABASE_DB_PASSWORD`                                          | Supabase CLI only | **Yes**                       |
+| `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`, `SEED_DEMO_PASSWORD` | Seed scripts only | **Yes** (passwords)           |
+| `STRIPE_SECRET_KEY`                                             | Server only       | **Yes** (must be `sk_test_…`) |
+| `STRIPE_WEBHOOK_SECRET`                                         | Server only       | **Yes**                       |
 
 Secret values are validated at runtime and imported only from `server-only` modules, so the build fails if one is ever pulled into browser code.
 
 ## Scripts
 
-| Command             | What it does                                      |
-| ------------------- | ------------------------------------------------- |
-| `npm run dev`       | Start the development server                      |
-| `npm run build`     | Production build                                  |
-| `npm run lint`      | ESLint                                            |
-| `npm run typecheck` | Generate route types and run the TypeScript check |
-| `npm test`          | Unit, component and database tests                |
-| `npm run verify`    | lint + typecheck + test + build (same as CI)      |
-| `npm run db:link`   | Link the Supabase CLI to your project             |
-| `npm run db:push`   | Apply migrations to the linked Supabase project   |
-| `npm run db:types`  | Generate TypeScript types from the database       |
+| Command                    | What it does                                      |
+| -------------------------- | ------------------------------------------------- |
+| `npm run dev`              | Start the development server                      |
+| `npm run build`            | Production build                                  |
+| `npm run lint`             | ESLint                                            |
+| `npm run typecheck`        | Generate route types and run the TypeScript check |
+| `npm test`                 | Unit, component and database tests                |
+| `npm run verify`           | lint + typecheck + test + build (same as CI)      |
+| `npm run db:link`          | Link the Supabase CLI to your project             |
+| `npm run db:push`          | Apply migrations to the linked Supabase project   |
+| `npm run db:types`         | Generate TypeScript types from the database       |
+| `npm run db:seed:generate` | Rebuild `supabase/seed.sql` from the catalog      |
+| `npm run db:seed:images`   | Upload catalog photos to Supabase Storage         |
+| `npm run db:seed:demo`     | Create demo accounts, orders, reviews and carts   |
+
+### Setting up a fresh database
+
+```bash
+npm run db:link                          # once
+npx supabase db push --include-seed      # schema + catalog
+npm run db:seed:images                   # product photos
+npm run db:seed:demo                     # demo admin, customers, orders
+```
+
+The demo script creates `SEED_ADMIN_EMAIL` as the admin and four customers (`ava.thompson@shopsphere.example`, `noah.bennett@…`, `mia.laurent@…`, `liam.okafor@…`) using the passwords in `.env.local`. All seed steps are safe to re-run: they never overwrite catalog or settings changes made later.
 
 ## Project structure
 
@@ -106,7 +123,7 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/DATABASE.md](
 ## Roadmap
 
 - [x] **Phase 1:** Project setup, architecture, design system, database schema
-- [ ] **Phase 2:** Supabase project, migrations applied, seed data and product imagery
+- [x] **Phase 2:** Supabase project, migrations applied, seed data and product imagery
 - [ ] **Phase 3:** Authentication, customer profiles, addresses, admin authorization
 - [ ] **Phase 4:** Storefront catalog: homepage, listing, search, filters, product pages
 - [ ] **Phase 5:** Cart (guest + signed-in, merged on login) and wishlist
@@ -120,4 +137,4 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/DATABASE.md](
 
 ## License
 
-Source code © Rawdha Hasan. Product photography is used under the licenses listed in `docs/IMAGE_CREDITS.md` (added with the seed data).
+Source code © Rawdha Hasan. Product photography is from Unsplash, used under the Unsplash License; photographers are credited in [docs/IMAGE_CREDITS.md](docs/IMAGE_CREDITS.md).
