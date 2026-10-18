@@ -36,10 +36,23 @@ The server, public and admin clients import `server-only`, so the build fails if
 
 Four independent layers:
 
-1. **Proxy** (`src/proxy.ts`) refreshes the Supabase session on every request and redirects signed-out visitors away from `/account`, `/checkout` and `/admin`. This is a fast first check only.
-2. **Admin layout** calls `requireAdmin()` on the server before rendering (Phase 3).
+1. **Proxy** (`src/proxy.ts`) refreshes the Supabase session on every request and redirects signed-out visitors away from `/account`, `/checkout` and `/admin` (and signed-in users away from `/login` and `/register`). It only verifies the session token's signature. It is a fast first check, not the security boundary.
+2. **Pages and data functions** call the Data Access Layer in `src/lib/auth/session.ts`: `requireUser()` for account pages and `requireAdmin()` for admin pages. The admin role is read from the database on every request, so a demoted admin loses access immediately.
 3. **Every Server Action** re-checks the user (and the admin role where needed), because actions can be called directly over HTTP.
 4. **Row-Level Security** in Postgres is the final guard. Even a buggy query can't read another customer's data.
+
+> **Pitfall: layouts don't protect pages.** Next.js renders a layout and its page in parallel, so a check in `app/admin/layout.tsx` cannot stop `app/admin/page.tsx` from running and sending its output. The admin layout's `AdminGate` only decides what to _show_; every admin page, data function and action calls `requireAdmin()` itself. `tests/admin-pages-guard.test.ts` fails the build if one doesn't.
+
+### Auth flows
+
+| Flow               | How                                                                                                                         |
+| ------------------ | --------------------------------------------------------------------------------------------------------------------------- |
+| Sign up            | `signUp` action → Supabase sends a confirmation email → link opens `/auth/callback`, which exchanges the code for a session |
+| Sign in / out      | `signIn` / `signOut` actions; errors never reveal whether an email has an account                                           |
+| Forgot password    | `requestPasswordReset` → email link → `/auth/callback?next=/account/password?reset=1` → `updatePassword`                    |
+| Return after login | `?next=` is sanitised by `safeRedirectPath()` so it can only point inside the site                                          |
+
+Password rules (10+ characters, upper- and lower-case letters and a digit) are checked by the form schema and enforced again by Supabase Auth (`supabase/config.toml`, pushed with `supabase config push`).
 
 Roles live in `profiles.role`. Sign-up always creates a `customer`. A trigger stops users changing their own role, and admins are promoted only with SQL run by the project owner.
 
