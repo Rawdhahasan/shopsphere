@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+/*
+ * ShopSphere design tokens.
+ * A warm, editorial palette for modern home & lifestyle goods:
+ * ivory canvas, near-black ink, oak/clay accents, muted sage for success.
+ * Tailwind turns each --color-* token into utilities (bg-canvas, text-ink, …).
+ */
+@theme {
+  --color-canvas: #faf8f5;
+  --color-surface: #ffffff;
+  --color-subtle: #f3efe9;
+  --color-sand: #e9e2d8;
+  --color-line: #e3ddd4;
+  --color-line-strong: #cfc7bb;
+
+  --color-ink: #1c1a17;
+  --color-ink-soft: #3b3731;
+  --color-ink-muted: #6b655c;
+  --color-ink-faint: #9a938a;
+
+  --color-accent: #9a5b3c;
+  --color-accent-strong: #7e4930;
+  --color-accent-soft: #f4e9e2;
+
+  --color-success: #4f6b4a;
+  --color-success-soft: #e8efe5;
+  --color-warning: #9a6a12;
+  --color-warning-soft: #f8eed9;
+  --color-danger: #b0332a;
+  --color-danger-soft: #f9e5e3;
+
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  --radius-sm: 0.25rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+
+  --shadow-soft: 0 1px 2px rgb(28 26 23 / 0.04), 0 4px 16px rgb(28 26 23 / 0.06);
+  --shadow-lifted: 0 2px 4px rgb(28 26 23 / 0.04), 0 12px 32px rgb(28 26 23 / 0.1);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+
+  --animate-fade-up: fade-up 600ms var(--ease-out-soft) both;
+  --animate-fade-in: fade-in 300ms ease-out both;
+
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
+@layer base {
+  html {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-canvas font-sans text-ink antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3 {
+    @apply font-display tracking-tight text-balance;
+    font-optical-sizing: auto;
+  }
+
+  ::selection {
+    @apply bg-accent-soft text-ink;
+  }
+
+  :focus-visible {
+    @apply outline-2 outline-offset-2 outline-ink;
+  }
+}
+
+/* Respect users who turn off motion in their OS settings. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
