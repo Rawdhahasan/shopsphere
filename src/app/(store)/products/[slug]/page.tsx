@@ -15,6 +15,10 @@ import {
   WishlistButtonPlaceholder,
 } from "@/features/wishlist/components/wishlist-button";
 import { isInWishlist } from "@/features/wishlist/server";
+import { submitReview } from "@/features/reviews/actions";
+import { ReviewForm } from "@/features/reviews/components/review-form";
+import { getMyReview } from "@/features/reviews/server";
+import { getSessionUser } from "@/lib/auth/session";
 import {
   getProduct,
   getProductReviews,
@@ -154,6 +158,18 @@ async function ProductContent({ params }: PageProps<"/products/[slug]">) {
 
         <div className="mt-20">
           <ProductReviews reviews={reviews} rating={product.rating} count={product.reviewCount} />
+          <section
+            id="write-review"
+            aria-labelledby="write-review-heading"
+            className="mt-12 scroll-mt-28 border-t border-line pt-10"
+          >
+            <h2 id="write-review-heading" className="font-sans text-base font-medium">
+              Write a review
+            </h2>
+            <Suspense fallback={<Skeleton className="mt-4 h-40 w-full max-w-xl" />}>
+              <ReviewComposer productId={product.id} slug={product.slug} />
+            </Suspense>
+          </section>
         </div>
 
         {related.length > 0 && (
@@ -187,6 +203,40 @@ async function WishlistToggle({
       saved={saved}
       returnTo={`/products/${slug}`}
     />
+  );
+}
+
+const REVIEW_STATUS_NOTE = {
+  pending: "Thanks for your review. It's waiting for approval and will appear here soon.",
+  approved: "Your review is published. You can update it below; changes are checked again.",
+  rejected: "Your review wasn't approved. You can edit it and submit it again.",
+} as const;
+
+/** Per-shopper review box: sign-in prompt, the form, or their existing review's status. */
+async function ReviewComposer({ productId, slug }: { productId: string; slug: string }) {
+  const user = await getSessionUser();
+  if (!user) {
+    return (
+      <p className="mt-3 text-sm text-ink-muted">
+        <Link
+          href={`/login?next=${encodeURIComponent(`/products/${slug}#write-review`)}`}
+          className="font-medium text-ink underline underline-offset-4"
+        >
+          Sign in
+        </Link>{" "}
+        to share what you think of this piece.
+      </p>
+    );
+  }
+  const mine = await getMyReview(productId);
+  return (
+    <div className="mt-4 space-y-5">
+      {mine && <p className="text-sm text-ink-muted">{REVIEW_STATUS_NOTE[mine.status]}</p>}
+      <ReviewForm
+        action={submitReview.bind(null, productId, slug)}
+        defaults={mine ? { rating: mine.rating, title: mine.title, body: mine.body } : undefined}
+      />
+    </div>
   );
 }
 

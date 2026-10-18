@@ -38,7 +38,15 @@ async function Overview() {
       />
       <div className="grid gap-6 xl:grid-cols-[1.6fr_1fr]">
         <Card className="p-6">
-          <h2 className="font-sans text-sm font-medium">Recent orders</h2>
+          <div className="flex items-center justify-between">
+            <h2 className="font-sans text-sm font-medium">Recent orders</h2>
+            <Link
+              href="/account/orders"
+              className="text-sm text-ink-muted underline underline-offset-4 hover:text-ink"
+            >
+              View all
+            </Link>
+          </div>
           {orders && orders.length > 0 ? (
             <ul className="mt-4 divide-y divide-line">
               {orders.map((order) => (
@@ -47,7 +55,12 @@ async function Overview() {
                   className="flex flex-wrap items-center justify-between gap-3 py-4"
                 >
                   <div>
-                    <p className="font-medium">{order.order_number}</p>
+                    <Link
+                      href={`/account/orders/${order.order_number}`}
+                      className="font-medium hover:underline"
+                    >
+                      {order.order_number}
+                    </Link>
                     <p className="text-sm text-ink-muted">{formatOrderDate(order.created_at)}</p>
                   </div>
                   <div className="flex items-center gap-4">
