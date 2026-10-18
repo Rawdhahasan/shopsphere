@@ -26,3 +26,10 @@ Full-stack e-commerce portfolio project. Read `README.md`, `docs/ARCHITECTURE.md
 
 - `npm run verify` runs lint, typecheck, tests and build. Run it before proposing a commit.
 - Vitest needs `--configLoader runner` (already in the npm scripts) due to a Vite 8 config-bundling issue.
+- npm 11.5 corrupts `package-lock.json` on incremental installs (drops `@rolldown/binding-*` platform entries, so `npm ci` fails on Linux CI). After adding or removing a dependency, rebuild the lockfile from a clean folder (`npm install` with only `package.json`) and confirm `grep -c '"node_modules/@rolldown/binding-' package-lock.json` is 15 and a clean `npm ci` succeeds.
+
+## Seed data
+
+- Catalog lives in `supabase/seed/catalog.ts`. `npm run db:seed:generate` writes `supabase/seed.sql` and `docs/IMAGE_CREDITS.md`; never edit those by hand.
+- Product photos must be free Unsplash photos (`images.unsplash.com`, not `plus.unsplash.com`), with no visible third-party branding. Credit each one in the catalog.
+- `npm run db:seed:images` uploads photos to Storage; `npm run db:seed:demo` creates demo accounts, orders and reviews (needs the `SEED_*` vars in `.env.local`).

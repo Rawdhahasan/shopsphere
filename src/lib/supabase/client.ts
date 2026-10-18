@@ -1,4 +1,5 @@
 import { createBrowserClient } from "@supabase/ssr";
+import type { Database } from "@/types/database";
 import { getPublicEnv } from "@/lib/env/public";
 
 /**
@@ -7,7 +8,7 @@ import { getPublicEnv } from "@/lib/env/public";
  */
 export function createClient() {
   const env = getPublicEnv();
-  return createBrowserClient(
+  return createBrowserClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
     env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
   );
