@@ -479,35 +479,113 @@ describe("restricted data", () => {
 });
 
 describe("storage", () => {
-  it("lets only admins upload catalog images", async () => {
-    await expectError(
-      user(ids.alice, () =>
-        db.query(
-          "insert into storage.objects (bucket_id, name) values ('product-images', 'x.jpg')",
+  const object = (bucket: string, name: string) =>
+    db.query("insert into storage.objects (bucket_id, name) values ($1, $2)", [bucket, name]);
+  const rename = (from: string, to: string) =>
+    db.query("update storage.objects set name = $2 where name = $1", [from, to]);
+  const remove = (name: string) => db.query("delete from storage.objects where name = $1", [name]);
+  const exists = async (name: string) =>
+    (await rows("select 1 from storage.objects where name = $1", [name])).length === 1;
+
+  const aliceAvatar = `${ids.alice}/me.webp`;
+  const bobAvatar = `${ids.bob}/me.webp`;
+
+  describe("catalog images", () => {
+    it("can be uploaded, replaced and deleted by admins", async () => {
+      await user(ids.admin, () => object("product-images", "chair.jpg"));
+      await user(ids.admin, () => object("category-images", "living.jpg"));
+
+      const updated = await user(ids.admin, () => rename("chair.jpg", "chair-v2.jpg"));
+      expect(updated.affectedRows).toBe(1);
+
+      const deleted = await user(ids.admin, () => remove("living.jpg"));
+      expect(deleted.affectedRows).toBe(1);
+      expect(await exists("living.jpg")).toBe(false);
+    });
+
+    it("can't be uploaded by customers or visitors", async () => {
+      await expectError(
+        user(ids.alice, () => object("product-images", "x.jpg")),
+        /row-level security/,
+      );
+      await expectError(
+        anon(() => object("product-images", "x.jpg")),
+        /row-level security/,
+      );
+    });
+
+    it("can't be replaced or deleted by customers or visitors", async () => {
+      expect((await user(ids.alice, () => rename("chair-v2.jpg", "hacked.jpg"))).affectedRows).toBe(
+        0,
+      );
+      expect((await user(ids.alice, () => remove("chair-v2.jpg"))).affectedRows).toBe(0);
+      expect((await anon(() => rename("chair-v2.jpg", "hacked.jpg"))).affectedRows).toBe(0);
+      expect((await anon(() => remove("chair-v2.jpg"))).affectedRows).toBe(0);
+      expect(await exists("chair-v2.jpg")).toBe(true);
+    });
+
+    it("can't be moved into the avatars bucket", async () => {
+      await expectError(
+        user(ids.admin, () =>
+          db.query("update storage.objects set bucket_id = 'avatars' where name = 'chair-v2.jpg'"),
         ),
-      ),
-      /row-level security/,
-    );
-    await user(ids.admin, () =>
-      db.query(
-        "insert into storage.objects (bucket_id, name) values ('product-images', 'chair.jpg')",
-      ),
-    );
+        /row-level security/,
+      );
+    });
   });
 
-  it("lets users upload avatars only into their own folder", async () => {
-    await user(ids.alice, () =>
-      db.query("insert into storage.objects (bucket_id, name) values ('avatars', $1)", [
-        `${ids.alice}/me.webp`,
-      ]),
-    );
-    await expectError(
-      user(ids.alice, () =>
-        db.query("insert into storage.objects (bucket_id, name) values ('avatars', $1)", [
-          `${ids.bob}/me.webp`,
-        ]),
-      ),
-      /row-level security/,
-    );
+  describe("avatars", () => {
+    it("can be uploaded, replaced and deleted by their owner", async () => {
+      await user(ids.alice, () => object("avatars", aliceAvatar));
+
+      const updated = await user(ids.alice, () => rename(aliceAvatar, `${ids.alice}/me-v2.webp`));
+      expect(updated.affectedRows).toBe(1);
+
+      const deleted = await user(ids.alice, () => remove(`${ids.alice}/me-v2.webp`));
+      expect(deleted.affectedRows).toBe(1);
+      expect(await exists(`${ids.alice}/me-v2.webp`)).toBe(false);
+    });
+
+    it("can only be uploaded into the user's own folder", async () => {
+      await expectError(
+        user(ids.alice, () => object("avatars", bobAvatar)),
+        /row-level security/,
+      );
+      await expectError(
+        user(ids.alice, () => object("avatars", "me.webp")),
+        /row-level security/,
+      );
+      await expectError(
+        anon(() => object("avatars", bobAvatar)),
+        /row-level security/,
+      );
+    });
+
+    it("can't be listed, replaced or deleted by other users", async () => {
+      await user(ids.bob, () => object("avatars", bobAvatar));
+
+      expect(await user(ids.alice, () => rows("select name from storage.objects"))).toEqual([]);
+      expect(
+        (await user(ids.alice, () => rename(bobAvatar, `${ids.alice}/stolen.webp`))).affectedRows,
+      ).toBe(0);
+      expect((await user(ids.alice, () => remove(bobAvatar))).affectedRows).toBe(0);
+      expect((await anon(() => remove(bobAvatar))).affectedRows).toBe(0);
+      expect(await exists(bobAvatar)).toBe(true);
+    });
+
+    it("can't be moved into another user's folder", async () => {
+      await expectError(
+        user(ids.bob, () => rename(bobAvatar, `${ids.alice}/planted.webp`)),
+        /row-level security/,
+      );
+    });
+
+    it("aren't writable by admins (least privilege)", async () => {
+      expect((await user(ids.admin, () => remove(bobAvatar))).affectedRows).toBe(0);
+      await expectError(
+        user(ids.admin, () => object("avatars", bobAvatar)),
+        /row-level security/,
+      );
+    });
   });
 });

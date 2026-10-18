@@ -14,14 +14,28 @@ values
     array['image/jpeg', 'image/png', 'image/webp'])
 on conflict (id) do nothing;
 
--- Catalog images: admins only.
+-- Why every bucket also has a SELECT policy:
+-- Postgres only lets a user UPDATE or DELETE rows they are allowed to SELECT.
+-- Without one, updates and deletes silently affect zero rows. Public URLs
+-- (/storage/v1/object/public/...) don't go through these policies, so the
+-- SELECT rules below only control listing/managing files, not viewing images.
+--
+-- UPDATE policies use WITH CHECK as well, so a file can't be moved into a
+-- bucket or folder its owner isn't allowed to write to.
+
+-- Catalog images (product-images, category-images): admins only.
+create policy "Admins list catalog images"
+  on storage.objects for select to authenticated
+  using (bucket_id in ('product-images', 'category-images') and (select public.is_admin()));
+
 create policy "Admins upload catalog images"
   on storage.objects for insert to authenticated
   with check (bucket_id in ('product-images', 'category-images') and (select public.is_admin()));
 
 create policy "Admins update catalog images"
   on storage.objects for update to authenticated
-  using (bucket_id in ('product-images', 'category-images') and (select public.is_admin()));
+  using (bucket_id in ('product-images', 'category-images') and (select public.is_admin()))
+  with check (bucket_id in ('product-images', 'category-images') and (select public.is_admin()));
 
 create policy "Admins delete catalog images"
   on storage.objects for delete to authenticated
@@ -29,13 +43,18 @@ create policy "Admins delete catalog images"
 
 -- Avatars: each user may only touch files inside a folder named after their id,
 -- e.g. avatars/3f1c…/photo.webp
+create policy "Users list own avatar"
+  on storage.objects for select to authenticated
+  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
+
 create policy "Users upload own avatar"
   on storage.objects for insert to authenticated
   with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
 
 create policy "Users update own avatar"
   on storage.objects for update to authenticated
-  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
+  using (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text)
+  with check (bucket_id = 'avatars' and (storage.foldername(name))[1] = (select auth.uid())::text);
 
 create policy "Users delete own avatar"
   on storage.objects for delete to authenticated

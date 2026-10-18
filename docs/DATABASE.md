@@ -68,6 +68,17 @@ Every product has **at least one variant**. Price, SKU and stock always live on 
 | store_settings                                  | read          | read                   | update                      |
 | stripe_events                                   | —             | —                      | — (server only)             |
 
+### Storage buckets
+
+All three buckets are public, so images are viewable by URL. The policies below control who may list, upload, replace or delete files.
+
+| Bucket                          | Visitor   | Customer                                        | Admin     |
+| ------------------------------- | --------- | ----------------------------------------------- | --------- |
+| product-images, category-images | view only | view only                                       | full      |
+| avatars                         | view only | full, only inside their own `<user id>/` folder | view only |
+
+Every bucket has a SELECT policy alongside its write policies, because Postgres only lets a user update or delete rows they can select. UPDATE policies also have `WITH CHECK`, so files can't be moved into another bucket or user's folder.
+
 ## Testing
 
 `tests/db/schema.test.ts` loads every migration into PGlite (an in-memory Postgres 17) together with a small stub of Supabase's `auth` and `storage` schemas, then checks the rules above as a visitor, two different customers, and an admin. Run it with `npm test`.
