@@ -1,5 +1,6 @@
 import "server-only";
 import { createClient } from "@supabase/supabase-js";
+import type { Database } from "@/types/database";
 import { getPublicEnv } from "@/lib/env/public";
 import { getServerEnv } from "@/lib/env/server";
 
@@ -11,7 +12,7 @@ import { getServerEnv } from "@/lib/env/server";
  * Never pass its results to the browser without filtering them first.
  */
 export function createAdminClient() {
-  return createClient(
+  return createClient<Database>(
     getPublicEnv().NEXT_PUBLIC_SUPABASE_URL,
     getServerEnv("SUPABASE_SECRET_KEY"),
     {

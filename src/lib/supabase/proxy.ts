@@ -1,4 +1,5 @@
 import { createServerClient } from "@supabase/ssr";
+import type { Database } from "@/types/database";
 import { NextResponse, type NextRequest } from "next/server";
 import { isGuestOnlyPath, isProtectedPath, safeRedirectPath } from "@/lib/auth/routes";
 import { getPublicEnv, isSupabaseConfigured } from "@/lib/env/public";
@@ -16,7 +17,7 @@ export async function updateSession(request: NextRequest) {
   if (!isSupabaseConfigured()) return response;
 
   const env = getPublicEnv();
-  const supabase = createServerClient(
+  const supabase = createServerClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
     env.NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY,
     {
