@@ -146,13 +146,18 @@ export async function getCart(): Promise<Cart> {
   if (!isSupabaseConfigured()) {
     return { items: [], count: 0, subtotalCents: 0, shipping: DEFAULT_SHIPPING, removedCount: 0 };
   }
-  const [{ lines }, shipping] = await Promise.all([getCartLines(), getStoreShipping()]);
-  const variants = await loadVariants(lines.map((l) => l.variantId));
+  const [{ userId, lines }, shipping] = await Promise.all([getCartLines(), getStoreShipping()]);
+  const [variants, reserved] = await Promise.all([
+    loadVariants(lines.map((l) => l.variantId)),
+    userId ? getOwnReservations(userId) : Promise.resolve(new Map<string, number>()),
+  ]);
 
   const items: CartItem[] = [];
   for (const line of lines) {
     const v = variants.get(line.variantId);
     if (!v?.product) continue;
+    // Stock this shopper is already holding in an unpaid checkout still counts as theirs.
+    const stock = v.stock_quantity + (reserved.get(v.id) ?? 0);
     const images = [...v.product.images].sort((a, b) => a.position - b.position);
     const image = images.find((i) => i.id === v.image_id) ?? images[0];
     items.push({
@@ -165,10 +170,10 @@ export async function getCart(): Promise<Cart> {
       unitPriceCents: v.price_cents,
       compareAtCents: v.compare_at_price_cents,
       quantity: line.quantity,
-      stock: v.stock_quantity,
+      stock,
       imageUrl: image ? publicStorageUrl("product-images", image.storage_path) : null,
       imageAlt: image?.alt_text || v.product.name,
-      overStock: line.quantity > v.stock_quantity,
+      overStock: line.quantity > stock,
     });
   }
 
@@ -179,6 +184,22 @@ export async function getCart(): Promise<Cart> {
     shipping,
     removedCount: lines.length - items.length,
   };
+}
+
+/** Quantities held by this shopper's own unpaid checkouts, per variant. */
+async function getOwnReservations(userId: string): Promise<Map<string, number>> {
+  const supabase = await createClient();
+  const { data } = await supabase
+    .from("order_items")
+    .select("variant_id, quantity, order:orders!inner(status, user_id)")
+    .eq("order.user_id", userId)
+    .eq("order.status", "pending_payment");
+  const totals = new Map<string, number>();
+  for (const row of data ?? []) {
+    if (row.variant_id)
+      totals.set(row.variant_id, (totals.get(row.variant_id) ?? 0) + row.quantity);
+  }
+  return totals;
 }
 
 /**

@@ -63,7 +63,8 @@ export async function createAddress(_prev: FormState, formData: FormData): Promi
   if (error) return errorState("We couldn't save this address. Please try again.", formData);
 
   revalidatePath("/account/addresses");
-  redirect("/account/addresses?saved=1");
+  // Only checkout may ask to come back; anything else goes to the address book.
+  redirect(formData.get("returnTo") === "/checkout" ? "/checkout" : "/account/addresses?saved=1");
 }
 
 export async function updateAddress(

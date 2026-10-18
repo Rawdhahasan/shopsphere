@@ -29,3 +29,16 @@ export function getServerEnv<K extends keyof ServerEnv>(key: K): ServerEnv[K] {
   }
   return result.data as ServerEnv[K];
 }
+
+/**
+ * True when a Stripe TEST key is configured. Without one, checkout runs in a
+ * clearly labelled demo mode that places orders without taking payment.
+ */
+export function isStripeConfigured(): boolean {
+  return serverEnvSchema.shape.STRIPE_SECRET_KEY.safeParse(process.env.STRIPE_SECRET_KEY).success;
+}
+
+export function isStripeWebhookConfigured(): boolean {
+  return serverEnvSchema.shape.STRIPE_WEBHOOK_SECRET.safeParse(process.env.STRIPE_WEBHOOK_SECRET)
+    .success;
+}

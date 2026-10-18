@@ -3,11 +3,12 @@
 import { Suspense } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { KeyRound, LayoutGrid, MapPin, UserRound } from "lucide-react";
+import { KeyRound, LayoutGrid, MapPin, Package, UserRound } from "lucide-react";
 import { cn } from "@/lib/utils/cn";
 
 const items = [
   { href: "/account", label: "Overview", icon: LayoutGrid },
+  { href: "/account/orders", label: "Orders", icon: Package },
   { href: "/account/profile", label: "Profile", icon: UserRound },
   { href: "/account/addresses", label: "Addresses", icon: MapPin },
   { href: "/account/password", label: "Password", icon: KeyRound },
