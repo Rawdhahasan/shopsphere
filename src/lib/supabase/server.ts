@@ -1,6 +1,7 @@
 import "server-only";
 import { createServerClient } from "@supabase/ssr";
 import { cookies } from "next/headers";
+import { connection } from "next/server";
 import type { Database } from "@/types/database";
 import { getPublicEnv } from "@/lib/env/public";
 
@@ -15,6 +16,9 @@ import { getPublicEnv } from "@/lib/env/public";
 export async function createClient() {
   const env = getPublicEnv();
   const cookieStore = await cookies();
+  // Session checks compare token expiry with the current time, which Cache Components
+  // only allows at request time; connection() marks everything below as per-request.
+  await connection();
 
   return createServerClient<Database>(
     env.NEXT_PUBLIC_SUPABASE_URL,
