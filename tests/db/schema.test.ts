@@ -446,6 +446,22 @@ describe("reviews", () => {
     );
     expect(review.status).toBe("pending");
   });
+
+  it("are listed publicly with a privacy-safe author name, approved only", async () => {
+    await user(ids.admin, () =>
+      db.query("update public.reviews set status = 'approved' where user_id = $1", [ids.alice]),
+    );
+    const listed = await anon(() => rows("select * from public.get_product_reviews($1)", [chair]));
+    expect(listed).toHaveLength(1);
+    expect(listed[0]).toMatchObject({ rating: 5, author_name: "Alice C." });
+    expect(Object.keys(listed[0])).not.toContain("user_id");
+    expect(JSON.stringify(listed)).not.toContain("alice@example.com");
+
+    const draft = "20000000-0000-4000-8000-000000000002";
+    expect(await anon(() => rows("select * from public.get_product_reviews($1)", [draft]))).toEqual(
+      [],
+    );
+  });
 });
 
 describe("restricted data", () => {

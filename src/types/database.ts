@@ -949,6 +949,18 @@ export type Database = {
         }
         Returns: number
       }
+      get_product_reviews: {
+        Args: { p_product_id: string }
+        Returns: {
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+          is_verified_purchase: boolean
+          rating: number
+          title: string
+        }[]
+      }
       has_purchased_product: {
         Args: { p_product_id: string }
         Returns: boolean
