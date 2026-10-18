@@ -87,8 +87,8 @@ Every bucket has a SELECT policy alongside its write policies, because Postgres 
 
 | Source                     | Produces                        | Contents                                                                                                                                              |
 | -------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `supabase/seed/catalog.ts` | `supabase/seed.sql` (generated) | 5 categories, 24 products (1 draft), 49 variants, opening stock log, 4 discount codes                                                                 |
-| `scripts/seed-images.ts`   | Storage files                   | 28 product photos and 5 category photos, 4:5 WebP                                                                                                     |
+| `supabase/seed/catalog.ts` | `supabase/seed.sql` (generated) | 5 categories, 44 products (1 draft), 78 variants, opening stock log, 4 discount codes                                                                 |
+| `scripts/seed-images.ts`   | Storage files                   | 48 product photos and 5 category photos, 4:5 WebP                                                                                                     |
 | `scripts/seed-demo.ts`     | Accounts and activity           | 1 admin, 4 customers with addresses, 18 orders over 4 months with tracking timelines, 12 reviews (approved, pending, rejected), a wishlist and a cart |
 
 Rows use fixed ids derived from stable keys (`scripts/lib/seed-ids.ts`), so every script can be re-run safely:

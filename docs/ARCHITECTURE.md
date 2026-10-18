@@ -29,7 +29,7 @@ The server, public and admin clients import `server-only`, so the build fails if
 
 ## Caching (Next.js 16 Cache Components)
 
-- Public catalog data is identical for every visitor. It's fetched with the cookie-free public client inside `"use cache"` functions and tagged (`cacheTag("products")`), so admin edits can refresh it instantly.
+- Public catalog data is identical for every visitor. It's fetched with the cookie-free public client inside `"use cache"` functions and tagged `catalog` (`src/features/catalog/queries.ts`), so admin edits can refresh it instantly with `updateTag("catalog")`.
 - Anything that reads the session cookie (cart count, account menu, orders) renders inside a `<Suspense>` boundary and streams in. The rest of the page is served from the static shell.
 
 ## Authentication & authorization
@@ -55,6 +55,15 @@ Four independent layers:
 Password rules (10+ characters, upper- and lower-case letters and a digit) are checked by the form schema and enforced again by Supabase Auth (`supabase/config.toml`, pushed with `supabase config push`).
 
 Roles live in `profiles.role`. Sign-up always creates a `customer`. A trigger stops users changing their own role, and admins are promoted only with SQL run by the project owner.
+
+## Catalog, cart and wishlist
+
+- **Filters live in the URL** (`?q=lamp&price=50-150&sort=newest`). `src/features/catalog/filters.ts` parses them leniently, so a hand-edited link falls back to defaults instead of erroring. Search combines Postgres full-text search with a partial-name match.
+- **Variant picker:** `src/features/catalog/variants.ts` finds the variant for a selection and marks each choice as available, sold out or nonexistent. Picking a value that doesn't exist with the current choices switches the other options to the closest real combination.
+- **Guest carts** live in an httpOnly cookie (`ss_cart`, variant id and quantity only), signed-in carts in `cart_items`. Signing in, signing up or opening an email link merges the guest cart into the account (quantities add up) and clears the cookie, so nothing is lost at the login step before checkout.
+- **Cart actions** accept only a variant id and quantity. Price, availability and stock are always re-read from the database.
+- **Wishlist** is for signed-in shoppers; guests are sent to sign in and brought back.
+- **Reviews** are listed through `get_product_reviews()`, which shows a privacy-safe name ("Ava T.") because profiles are private.
 
 ## Money and checkout
 

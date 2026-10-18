@@ -2,7 +2,7 @@
 
 A full-stack e-commerce platform for modern home and lifestyle goods, with a premium customer storefront and a complete admin dashboard.
 
-> **Status:** in active development. Phases 1–3 (architecture, design system, database, seed data, authentication and accounts) are complete. See the [roadmap](#roadmap).
+> **Status:** in active development. Phases 1–5 (architecture, design system, database, seed data, authentication, accounts, catalog, cart and wishlist) are complete. See the [roadmap](#roadmap).
 > Payments run in **Stripe test mode only**. No real charges are ever made.
 
 ## Highlights
@@ -13,7 +13,7 @@ A full-stack e-commerce platform for modern home and lifestyle goods, with a pre
 - **Server-side pricing**: totals, discounts, shipping and tax are always recalculated on the server from database prices
 - **Safe payments**: Stripe Checkout with signature-verified, idempotent webhooks and atomic stock reservation
 - **Tested database rules**: 45+ tests run every migration and the seed data in an in-memory Postgres and verify what each type of user can and can't do
-- **Realistic seed data**: 24 products with 49 variants, licensed photography, demo customers, orders and reviews
+- **Realistic seed data**: 44 products with 78 variants, licensed photography, demo customers, orders and reviews
 
 ## Tech stack
 
@@ -125,8 +125,8 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/DATABASE.md](
 - [x] **Phase 1:** Project setup, architecture, design system, database schema
 - [x] **Phase 2:** Supabase project, migrations applied, seed data and product imagery
 - [x] **Phase 3:** Authentication, customer profiles, addresses, admin authorization
-- [ ] **Phase 4:** Storefront catalog: homepage, listing, search, filters, product pages
-- [ ] **Phase 5:** Cart (guest + signed-in, merged on login) and wishlist
+- [x] **Phase 4:** Storefront catalog: homepage, listing, search, filters, product pages
+- [x] **Phase 5:** Cart (guest + signed-in, merged on login) and wishlist
 - [ ] **Phase 6:** Checkout with Stripe, webhooks, stock reservation, discount codes
 - [ ] **Phase 7:** Order history and tracking, ratings and reviews
 - [ ] **Phase 8:** Admin: products and variants, categories, inventory
