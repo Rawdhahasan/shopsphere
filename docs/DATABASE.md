@@ -83,6 +83,21 @@ Every bucket has a SELECT policy alongside its write policies, because Postgres 
 
 `tests/db/schema.test.ts` loads every migration into PGlite (an in-memory Postgres 17) together with a small stub of Supabase's `auth` and `storage` schemas, then checks the rules above as a visitor, two different customers, and an admin. Run it with `npm test`.
 
+## Seed data
+
+| Source                     | Produces                        | Contents                                                                                                                                              |
+| -------------------------- | ------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `supabase/seed/catalog.ts` | `supabase/seed.sql` (generated) | 5 categories, 24 products (1 draft), 49 variants, opening stock log, 4 discount codes                                                                 |
+| `scripts/seed-images.ts`   | Storage files                   | 28 product photos and 5 category photos, 4:5 WebP                                                                                                     |
+| `scripts/seed-demo.ts`     | Accounts and activity           | 1 admin, 4 customers with addresses, 18 orders over 4 months with tracking timelines, 12 reviews (approved, pending, rejected), a wishlist and a cart |
+
+Rows use fixed ids derived from stable keys (`scripts/lib/seed-ids.ts`), so every script can be re-run safely:
+
+- `seed.sql` only inserts missing rows (`on conflict do nothing`) and only fills in store settings on a fresh store.
+- The image script skips files that already exist unless run with `--force`.
+- The demo script reuses existing accounts (never changes their passwords) and only resets its own demo orders and reviews.
+- Demo orders are historical and don't reduce current stock.
+
 ## Workflow
 
 ```bash

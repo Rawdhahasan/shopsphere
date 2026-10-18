@@ -16,6 +16,9 @@
     "db:push": "supabase db push",
     "db:new": "supabase migration new",
     "db:types": "supabase gen types typescript --linked --schema public > src/types/database.ts",
+    "db:seed:generate": "tsx scripts/generate-seed.ts && prettier --write docs/IMAGE_CREDITS.md --log-level warn",
+    "db:seed:images": "tsx scripts/seed-images.ts",
+    "db:seed:demo": "tsx scripts/seed-demo.ts",
     "verify": "npm run lint && npm run typecheck && npm run test && npm run build"
   },
   "dependencies": {
@@ -49,6 +52,7 @@
     "prettier-plugin-tailwindcss": "^0.8.1",
     "supabase": "^2.121.0",
     "tailwindcss": "^4",
+    "tsx": "^4.23.15",
     "typescript": "^5",
     "vitest": "^5.0.5"
   },
