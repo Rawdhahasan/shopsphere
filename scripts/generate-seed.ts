@@ -79,7 +79,7 @@ products.forEach((product, productIndex) => {
     json(product.specifications),
     `'${status}'`,
     String(Boolean(product.featured)),
-    status === "active" ? q(publishedAt(productIndex)) : "null",
+    status === "active" ? q(product.publishedAt ?? publishedAt(productIndex)) : "null",
   ]);
 
   const imageIds = product.images.map((image, imageIndex) => {
