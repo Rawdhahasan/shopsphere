@@ -2,7 +2,7 @@
 
 A full-stack e-commerce platform for modern home and lifestyle goods, with a premium customer storefront and a complete admin dashboard.
 
-> **Status:** in active development. Phases 1–2 (architecture, design system, database, seed data) are complete. See the [roadmap](#roadmap).
+> **Status:** in active development. Phases 1–3 (architecture, design system, database, seed data, authentication and accounts) are complete. See the [roadmap](#roadmap).
 > Payments run in **Stripe test mode only**. No real charges are ever made.
 
 ## Highlights
@@ -124,7 +124,7 @@ More detail: [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) · [docs/DATABASE.md](
 
 - [x] **Phase 1:** Project setup, architecture, design system, database schema
 - [x] **Phase 2:** Supabase project, migrations applied, seed data and product imagery
-- [ ] **Phase 3:** Authentication, customer profiles, addresses, admin authorization
+- [x] **Phase 3:** Authentication, customer profiles, addresses, admin authorization
 - [ ] **Phase 4:** Storefront catalog: homepage, listing, search, filters, product pages
 - [ ] **Phase 5:** Cart (guest + signed-in, merged on login) and wishlist
 - [ ] **Phase 6:** Checkout with Stripe, webhooks, stock reservation, discount codes

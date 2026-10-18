@@ -1,10 +1,18 @@
+import { Suspense } from "react";
+import { AccountIcon, AccountLink } from "@/components/layout/account-link";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 
 export default function StoreLayout({ children }: LayoutProps<"/">) {
   return (
     <>
-      <SiteHeader />
+      <SiteHeader
+        account={
+          <Suspense fallback={<AccountIcon />}>
+            <AccountLink />
+          </Suspense>
+        }
+      />
       <main id="main" className="flex-1">
         {children}
       </main>

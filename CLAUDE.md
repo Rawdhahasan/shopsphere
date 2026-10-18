@@ -19,6 +19,10 @@ Full-stack e-commerce portfolio project. Read `README.md`, `docs/ARCHITECTURE.md
 - Pick the right Supabase client (`src/lib/supabase/*`). `admin.ts` bypasses RLS: only for webhooks, seeding, or after `requireAdmin()`.
 - Cache Components is on: anything reading cookies goes inside `<Suspense>`. Public catalog reads use `createPublicClient()` inside `"use cache"`.
 - Server Actions validate input with Zod and re-check auth themselves.
+- Auth goes through `src/lib/auth/session.ts` (`getSessionUser`, `getCurrentProfile`, `requireUser`, `requireAdmin`). Layouts render in parallel with pages, so **every admin page, admin data function and admin action must call `requireAdmin()` itself** (`tests/admin-pages-guard.test.ts` enforces it).
+- Client hooks that read the URL (`usePathname`) must sit inside `<Suspense>` with a fallback, or pages with dynamic params fail to build.
+- Forms: client component + `useActionState`, the Server Action passed in as a prop (keeps forms testable), returning `FormState` from `src/lib/forms/form-state.ts`.
+- Change hosted Supabase settings via `supabase/config.toml` + `supabase config push`. Preview first and keep the file in sync with the live project, or the push silently reverts live settings.
 - Schema changes go in a NEW migration file. Add or extend tests in `tests/db/schema.test.ts` for any new rule.
 - UI uses the primitives in `src/components/ui` and the tokens in `src/app/globals.css`.
 

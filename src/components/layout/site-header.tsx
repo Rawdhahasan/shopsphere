@@ -1,9 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
+import { Heart, Menu, Search, ShoppingBag, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui";
 import { siteConfig } from "@/config/site";
@@ -12,15 +12,36 @@ import { cn } from "@/lib/utils/cn";
 const iconLink =
   "inline-flex size-10 items-center justify-center rounded-full text-ink transition-colors hover:bg-subtle";
 
-export function SiteHeader() {
-  const pathname = usePathname();
-  const [menuOpen, setMenuOpen] = useState(false);
-  const [openedAt, setOpenedAt] = useState(pathname);
+function MainNavLinks({ pathname }: { pathname: string | null }) {
+  return (
+    <ul className="flex items-center gap-7">
+      {siteConfig.storeNav.map((item) => (
+        <li key={item.href}>
+          <Link
+            href={item.href}
+            aria-current={pathname === item.href ? "page" : undefined}
+            className="text-sm text-ink-soft transition-colors hover:text-ink aria-[current=page]:text-ink"
+          >
+            {item.label}
+          </Link>
+        </li>
+      ))}
+    </ul>
+  );
+}
 
-  // Close the mobile menu after navigating (adjusting state during render, not in an effect).
-  if (menuOpen && openedAt !== pathname) {
-    setMenuOpen(false);
-  }
+/**
+ * Reading the URL suspends on pages with unknown dynamic params, so the active
+ * highlight streams in while the plain links are part of the static shell.
+ */
+function MainNavWithActive() {
+  return <MainNavLinks pathname={usePathname()} />;
+}
+
+/** `account` is rendered by the server (it reads the session), so it's passed in as a slot. */
+export function SiteHeader({ account }: { account: ReactNode }) {
+  const [menuOpen, setMenuOpen] = useState(false);
+  const closeMenu = () => setMenuOpen(false);
 
   useEffect(() => {
     if (!menuOpen) return;
@@ -45,10 +66,7 @@ export function SiteHeader() {
           aria-label={menuOpen ? "Close menu" : "Open menu"}
           aria-expanded={menuOpen}
           aria-controls="mobile-menu"
-          onClick={() => {
-            setOpenedAt(pathname);
-            setMenuOpen((open) => !open);
-          }}
+          onClick={() => setMenuOpen((open) => !open)}
         >
           {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
         </button>
@@ -56,19 +74,9 @@ export function SiteHeader() {
         <Logo className="lg:mr-6" />
 
         <nav aria-label="Main" className="hidden flex-1 lg:block">
-          <ul className="flex items-center gap-7">
-            {siteConfig.storeNav.map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                  className="text-sm text-ink-soft transition-colors hover:text-ink aria-[current=page]:text-ink"
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          <Suspense fallback={<MainNavLinks pathname={null} />}>
+            <MainNavWithActive />
+          </Suspense>
         </nav>
 
         <div className="ml-auto flex items-center gap-1">
@@ -82,9 +90,7 @@ export function SiteHeader() {
           >
             <Heart className="size-5" strokeWidth={1.75} />
           </Link>
-          <Link href="/account" className={iconLink} aria-label="Account">
-            <User className="size-5" strokeWidth={1.75} />
-          </Link>
+          {account}
           <Link href="/cart" className={iconLink} aria-label="Cart">
             <ShoppingBag className="size-5" strokeWidth={1.75} />
           </Link>
@@ -101,14 +107,23 @@ export function SiteHeader() {
               <ul className="divide-y divide-line">
                 {siteConfig.storeNav.map((item) => (
                   <li key={item.href}>
-                    <Link href={item.href} className="block py-4 font-display text-2xl">
+                    <Link
+                      href={item.href}
+                      onClick={closeMenu}
+                      className="block py-4 font-display text-2xl"
+                    >
                       {item.label}
                     </Link>
                   </li>
                 ))}
                 <li>
-                  <Link href="/wishlist" className="block py-4 text-ink-soft">
+                  <Link href="/wishlist" onClick={closeMenu} className="block py-4 text-ink-soft">
                     Wishlist
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/account" onClick={closeMenu} className="block py-4 text-ink-soft">
+                    My account
                   </Link>
                 </li>
               </ul>
