@@ -370,7 +370,7 @@ describe("orders", () => {
     expect(order.shipped_at).not.toBeNull();
   });
 
-  it("reject inconsistent totals", async () => {
+  it("reject inconsistent totals in the database itself", async () => {
     await expectError(
       db.query(
         `insert into public.orders (user_id, email, subtotal_cents, shipping_cents, total_cents, shipping_address)
@@ -379,6 +379,158 @@ describe("orders", () => {
       ),
       /check constraint/,
     );
+  });
+});
+
+describe("checkout", () => {
+  const oak = "40000000-0000-4000-8000-000000000001";
+  const walnut = "40000000-0000-4000-8000-000000000002";
+  const service = <T>(fn: () => Promise<T>) => as("service_role", null, fn);
+
+  const stockOf = async (variantId: string) =>
+    (
+      await rows<{ stock_quantity: number }>(
+        "select stock_quantity from public.product_variants where id = $1",
+        [variantId],
+      )
+    )[0].stock_quantity;
+
+  const line = (variantId: string, price: number, quantity: number) => ({
+    variant_id: variantId,
+    quantity,
+    unit_price_cents: price,
+    image_path: null,
+  });
+
+  async function reserve(lines: ReturnType<typeof line>[], discount: string | null = null) {
+    const subtotal = lines.reduce((sum, l) => sum + l.unit_price_cents * l.quantity, 0);
+    const discountRow = discount
+      ? (
+          await rows<{ id: string }>("select id from public.discount_codes where code = $1", [
+            discount,
+          ])
+        )[0]
+      : null;
+    const [result] = await service(() =>
+      rows<{ order_id: string; order_number: string }>(
+        `select * from public.reserve_order($1, 'alice@example.com', $2::jsonb, $3, 0, 0, 0, $3, $4, $5,
+           '{"city":"Oslo"}'::jsonb, now() + interval '30 minutes')`,
+        [ids.alice, JSON.stringify(lines), subtotal, discountRow?.id ?? null, discount],
+      ),
+    );
+    return result;
+  }
+
+  it("reserves stock and creates a pending order with its items", async () => {
+    const before = await stockOf(oak);
+    const order = await reserve([line(oak, 49000, 1)]);
+    expect(order.order_number).toMatch(/^SS-\d+$/);
+    expect(await stockOf(oak)).toBe(before - 1);
+    const [saved] = await rows<{ status: string; total_cents: number }>(
+      "select status, total_cents from public.orders where id = $1",
+      [order.order_id],
+    );
+    expect(saved).toEqual({ status: "pending_payment", total_cents: 49000 });
+    const movements = await rows<{ quantity_change: number; reason: string }>(
+      "select quantity_change, reason from public.inventory_movements where order_id = $1",
+      [order.order_id],
+    );
+    expect(movements).toEqual([{ quantity_change: -1, reason: "reservation" }]);
+  });
+
+  it("is all or nothing when an item runs out", async () => {
+    const [oakBefore, walnutBefore] = [await stockOf(oak), await stockOf(walnut)];
+    const orderCount = (await rows("select id from public.orders")).length;
+    await expectError(
+      reserve([line(oak, 49000, 1), line(walnut, 59000, walnutBefore + 1)]),
+      /OUT_OF_STOCK:CHAIR-WAL/,
+    );
+    expect(await stockOf(oak)).toBe(oakBefore);
+    expect(await stockOf(walnut)).toBe(walnutBefore);
+    expect(await rows("select id from public.orders")).toHaveLength(orderCount);
+  });
+
+  it("refuses a price that changed since the cart was totalled", async () => {
+    await expectError(reserve([line(oak, 100, 1)]), /PRICE_CHANGED:CHAIR-OAK/);
+  });
+
+  it("refuses inactive variants and unpublished products", async () => {
+    await expectError(
+      reserve([line("40000000-0000-4000-8000-000000000003", 39000, 1)]),
+      /UNAVAILABLE/,
+    );
+    await expectError(
+      reserve([line("40000000-0000-4000-8000-000000000004", 1000, 1)]),
+      /UNAVAILABLE/,
+    );
+  });
+
+  it("marks an order paid once, counts the discount once and empties the cart", async () => {
+    await db.query(
+      "insert into public.cart_items (user_id, variant_id, quantity) values ($1, $2, 1) on conflict do nothing",
+      [ids.alice, oak],
+    );
+    const [{ redemption_count: before }] = await rows<{ redemption_count: number }>(
+      "select redemption_count from public.discount_codes where code = 'WELCOME10'",
+    );
+    const order = await reserve([line(oak, 49000, 1)], "WELCOME10");
+    const pay = () =>
+      service(() =>
+        rows<{ paid: boolean }>(
+          "select public.mark_order_paid($1, 'cs_test_1', 'pi_test_1') as paid",
+          [order.order_id],
+        ),
+      );
+    expect((await pay())[0].paid).toBe(true);
+    expect((await pay())[0].paid).toBe(false);
+    const [{ redemption_count: after }] = await rows<{ redemption_count: number }>(
+      "select redemption_count from public.discount_codes where code = 'WELCOME10'",
+    );
+    expect(after).toBe(before + 1);
+    expect(
+      await rows("select 1 from public.cart_items where user_id = $1 and variant_id = $2", [
+        ids.alice,
+        oak,
+      ]),
+    ).toEqual([]);
+    const [saved] = await rows<{ status: string; paid_at: Date | null }>(
+      "select status, paid_at from public.orders where id = $1",
+      [order.order_id],
+    );
+    expect(saved.status).toBe("paid");
+    expect(saved.paid_at).not.toBeNull();
+  });
+
+  it("releases the stock of an unpaid order, but never of a paid one", async () => {
+    const before = await stockOf(oak);
+    const order = await reserve([line(oak, 49000, 1)]);
+    const release = () =>
+      service(() =>
+        rows<{ released: boolean }>("select public.release_order($1) as released", [
+          order.order_id,
+        ]),
+      );
+    expect((await release())[0].released).toBe(true);
+    expect(await stockOf(oak)).toBe(before);
+    expect((await release())[0].released).toBe(false);
+    const [saved] = await rows<{ status: string }>(
+      "select status from public.orders where id = $1",
+      [order.order_id],
+    );
+    expect(saved.status).toBe("cancelled");
+  });
+
+  it("can't be called by visitors or customers", async () => {
+    for (const run of [anon, <T>(fn: () => Promise<T>) => user(ids.alice, fn)]) {
+      await expectError(
+        run(() => db.query("select public.mark_order_paid(gen_random_uuid())")),
+        /permission denied/,
+      );
+      await expectError(
+        run(() => db.query("select public.release_order(gen_random_uuid())")),
+        /permission denied/,
+      );
+    }
   });
 });
 
