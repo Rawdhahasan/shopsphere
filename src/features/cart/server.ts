@@ -94,10 +94,11 @@ export async function getStoreShipping(): Promise<StoreShipping> {
     .select("flat_shipping_cents, free_shipping_threshold_cents, tax_rate_bps")
     .eq("id", 1)
     .maybeSingle();
+  if (!data) return DEFAULT_SHIPPING;
   return {
-    flatCents: data?.flat_shipping_cents ?? 1200,
-    freeThresholdCents: data ? data.free_shipping_threshold_cents : 15000,
-    taxRateBps: data?.tax_rate_bps ?? 0,
+    flatCents: data.flat_shipping_cents,
+    freeThresholdCents: data.free_shipping_threshold_cents,
+    taxRateBps: data.tax_rate_bps,
   };
 }
 
@@ -134,7 +135,17 @@ export async function loadVariants(variantIds: string[]): Promise<Map<string, Va
   return new Map((data as unknown as VariantRow[]).filter((v) => v.product).map((v) => [v.id, v]));
 }
 
+const DEFAULT_SHIPPING: StoreShipping = {
+  flatCents: 1200,
+  freeThresholdCents: 15000,
+  taxRateBps: 0,
+};
+
 export async function getCart(): Promise<Cart> {
+  // Before Supabase is configured (CI builds), there's nothing to load.
+  if (!isSupabaseConfigured()) {
+    return { items: [], count: 0, subtotalCents: 0, shipping: DEFAULT_SHIPPING, removedCount: 0 };
+  }
   const [{ lines }, shipping] = await Promise.all([getCartLines(), getStoreShipping()]);
   const variants = await loadVariants(lines.map((l) => l.variantId));
 
