@@ -352,3 +352,17 @@ export async function getProductReviews(productId: string): Promise<ProductRevie
     author: r.author_name,
   }));
 }
+
+/** Cards for specific products (wishlist), in the order given. Unpublished products are skipped. */
+export async function getProductCards(ids: string[]): Promise<ProductCardData[]> {
+  "use cache";
+  cacheCatalog();
+  if (!isSupabaseConfigured() || ids.length === 0) return [];
+  const { data, error } = await createPublicClient()
+    .from("products")
+    .select(`${CARD_FIELDS}, category:categories(slug, name)`)
+    .in("id", ids);
+  if (error) throw new Error(`Couldn't load products: ${error.message}`);
+  const cards = new Map((data as unknown as CardRow[]).map((row) => [row.id, toCard(row)]));
+  return ids.flatMap((id) => cards.get(id) ?? []);
+}

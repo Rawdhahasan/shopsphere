@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Heart, Menu, Search, ShoppingBag, X } from "lucide-react";
+import { Heart, Menu, Search, X } from "lucide-react";
 import { Logo } from "@/components/brand/logo";
 import { Container } from "@/components/ui";
 import { siteConfig } from "@/config/site";
@@ -38,8 +38,11 @@ function MainNavWithActive() {
   return <MainNavLinks pathname={usePathname()} />;
 }
 
-/** `account` is rendered by the server (it reads the session), so it's passed in as a slot. */
-export function SiteHeader({ account }: { account: ReactNode }) {
+/**
+ * `account` and `cart` are rendered by the server (they read the session and
+ * cart cookie), so they're passed in as slots.
+ */
+export function SiteHeader({ account, cart }: { account: ReactNode; cart: ReactNode }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
@@ -91,9 +94,7 @@ export function SiteHeader({ account }: { account: ReactNode }) {
             <Heart className="size-5" strokeWidth={1.75} />
           </Link>
           {account}
-          <Link href="/cart" className={iconLink} aria-label="Cart">
-            <ShoppingBag className="size-5" strokeWidth={1.75} />
-          </Link>
+          {cart}
         </div>
       </Container>
 

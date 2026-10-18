@@ -11,6 +11,11 @@ import { ProductReviews } from "@/features/catalog/components/product-reviews";
 import { ProductView } from "@/features/catalog/components/product-view";
 import { RatingStars } from "@/features/catalog/components/rating-stars";
 import {
+  WishlistButton,
+  WishlistButtonPlaceholder,
+} from "@/features/wishlist/components/wishlist-button";
+import { isInWishlist } from "@/features/wishlist/server";
+import {
   getProduct,
   getProductReviews,
   getRelatedProducts,
@@ -87,6 +92,11 @@ async function ProductContent({ params }: PageProps<"/products/[slug]">) {
                 )}
               </>
             }
+            wishlist={
+              <Suspense fallback={<WishlistButtonPlaceholder />}>
+                <WishlistToggle productId={product.id} name={product.name} slug={product.slug} />
+              </Suspense>
+            }
             details={
               product.shortDescription && (
                 <p className="mt-6 max-w-prose leading-relaxed text-ink-soft">
@@ -156,6 +166,27 @@ async function ProductContent({ params }: PageProps<"/products/[slug]">) {
         )}
       </Container>
     </>
+  );
+}
+
+/** Reads whether this shopper saved the product, outside the cached page content. */
+async function WishlistToggle({
+  productId,
+  name,
+  slug,
+}: {
+  productId: string;
+  name: string;
+  slug: string;
+}) {
+  const saved = await isInWishlist(productId);
+  return (
+    <WishlistButton
+      productId={productId}
+      productName={name}
+      saved={saved}
+      returnTo={`/products/${slug}`}
+    />
   );
 }
 

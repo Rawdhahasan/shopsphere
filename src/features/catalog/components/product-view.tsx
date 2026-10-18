@@ -30,6 +30,7 @@ export function ProductView({
   variants,
   header,
   details,
+  wishlist,
 }: {
   name: string;
   images: CatalogImage[];
@@ -39,6 +40,8 @@ export function ProductView({
   header: ReactNode;
   /** Short description, shipping notes and so on. */
   details?: ReactNode;
+  /** Save-to-wishlist button, rendered on the server per shopper. */
+  wishlist?: ReactNode;
 }) {
   const [selection, setSelection] = useState<Selection>(() => initialSelection(variants, options));
   const [quantity, setQuantity] = useState(1);
@@ -144,6 +147,7 @@ export function ProductView({
               soldOut={soldOut}
             />
           </div>
+          {wishlist}
         </div>
       </div>
     </div>

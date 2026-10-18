@@ -1,6 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
+import { mergeGuestCartIntoAccount } from "@/features/cart/server";
 import { safeRedirectPath } from "@/lib/auth/routes";
 import { requireUser } from "@/lib/auth/session";
 import { getPublicEnv } from "@/lib/env/public";
@@ -44,7 +45,7 @@ export async function signIn(_prev: FormState, formData: FormData): Promise<Form
   const { email, password, next } = parsed.data;
 
   const supabase = await createClient();
-  const { error } = await supabase.auth.signInWithPassword({ email, password });
+  const { data, error } = await supabase.auth.signInWithPassword({ email, password });
   if (error) {
     if (error.code === "email_not_confirmed") {
       return errorState(
@@ -55,6 +56,8 @@ export async function signIn(_prev: FormState, formData: FormData): Promise<Form
     return errorState(friendlyAuthError(error.code, "Incorrect email or password."), formData);
   }
 
+  // Keep anything the shopper added before signing in.
+  await mergeGuestCartIntoAccount(data.user.id, supabase);
   redirect(safeRedirectPath(next, "/account"));
 }
 
@@ -78,7 +81,10 @@ export async function signUp(_prev: FormState, formData: FormData): Promise<Form
   }
 
   // Email confirmation off: Supabase signs the user in straight away.
-  if (data.session) redirect(destination);
+  if (data.session && data.user) {
+    await mergeGuestCartIntoAccount(data.user.id, supabase);
+    redirect(destination);
+  }
 
   // Confirmation on (or the address is already registered): same message either
   // way, so the form can't be used to discover who has an account.
