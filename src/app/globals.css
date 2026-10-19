@@ -22,6 +22,8 @@
   --color-accent: #9a5b3c;
   --color-accent-strong: #7e4930;
   --color-accent-soft: #f4e9e2;
+  /* Data marks: the accent nudged richer so lines/bars clear the dataviz chroma floor. */
+  --color-chart: #a85a34;
 
   --color-success: #4f6b4a;
   --color-success-soft: #e8efe5;
