@@ -41,7 +41,7 @@ export async function ProductListing({
 
         <div className="mt-8">
           {result.products.length > 0 ? (
-            <ProductGrid products={result.products} priorityCount={4} />
+            <ProductGrid products={result.products} priorityCount={4} headingLevel="h2" />
           ) : (
             <EmptyState
               icon={SearchX}

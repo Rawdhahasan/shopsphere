@@ -16,7 +16,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
           Payments run in Stripe test mode. No real charges are made.
         </p>
       </main>
-      <div className="relative hidden bg-sand lg:block">
+      <aside aria-label="About ShopSphere" className="relative hidden bg-sand lg:block">
         {image && (
           <Image
             src={image}
@@ -33,7 +33,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
             Save addresses, track orders and keep a wishlist of the pieces you love.
           </p>
         </div>
-      </div>
+      </aside>
     </div>
   );
 }

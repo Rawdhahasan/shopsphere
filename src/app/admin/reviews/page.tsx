@@ -83,7 +83,7 @@ async function ReviewList({ searchParams }: Pick<PageProps<"/admin/reviews">, "s
                     <div className="flex flex-wrap items-center gap-3">
                       <RatingStars rating={review.rating} />
                       {review.title && (
-                        <h3 className="font-sans text-sm font-medium">{review.title}</h3>
+                        <h2 className="font-sans text-sm font-medium">{review.title}</h2>
                       )}
                     </div>
                     {review.body && (

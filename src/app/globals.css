@@ -17,7 +17,7 @@
   --color-ink: #1c1a17;
   --color-ink-soft: #3b3731;
   --color-ink-muted: #6b655c;
-  --color-ink-faint: #9a938a;
+  --color-ink-faint: #756f66; /* 4.7:1 on canvas: the lightest grey that still passes for small text */
 
   --color-accent: #9a5b3c;
   --color-accent-strong: #7e4930;
@@ -27,7 +27,7 @@
 
   --color-success: #4f6b4a;
   --color-success-soft: #e8efe5;
-  --color-warning: #9a6a12;
+  --color-warning: #8a5d0d;
   --color-warning-soft: #f8eed9;
   --color-danger: #b0332a;
   --color-danger-soft: #f9e5e3;

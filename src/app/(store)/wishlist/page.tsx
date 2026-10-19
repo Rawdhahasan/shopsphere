@@ -73,7 +73,7 @@ async function WishlistContent() {
       <ul className="mt-10 grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
         {products.map((product) => (
           <li key={product.id} className="flex flex-col gap-4">
-            <ProductCard product={product} />
+            <ProductCard product={product} headingLevel="h2" />
             <WishlistButton
               productId={product.id}
               productName={product.name}

@@ -12,9 +12,12 @@ export const CARD_IMAGE_SIZES = "(min-width: 1280px) 22vw, (min-width: 1024px) 3
 export function ProductCard({
   product,
   priority = false,
+  headingLevel: Heading = "h3",
 }: {
   product: ProductCardData;
   priority?: boolean;
+  /** h2 when the grid sits directly under the page title, h3 under a section heading. */
+  headingLevel?: "h2" | "h3";
 }) {
   const saving = savingPercent(product.priceCents, product.compareAtCents);
   const hasRange = product.maxPriceCents > product.priceCents;
@@ -63,11 +66,11 @@ export function ProductCard({
         {product.categoryName && (
           <p className="text-xs tracking-wide text-ink-muted">{product.categoryName}</p>
         )}
-        <h3 className="font-sans text-[0.95rem] leading-snug font-medium">
+        <Heading className="font-sans text-[0.95rem] leading-snug font-medium">
           <Link href={`/products/${product.slug}`} className="after:absolute after:inset-0">
             {product.name}
           </Link>
-        </h3>
+        </Heading>
         <Price
           cents={product.priceCents}
           compareAtCents={product.compareAtCents}
@@ -85,15 +88,17 @@ export function ProductCard({
 export function ProductGrid({
   products,
   priorityCount = 0,
+  headingLevel = "h3",
 }: {
   products: ProductCardData[];
   priorityCount?: number;
+  headingLevel?: "h2" | "h3";
 }) {
   return (
     <ul className="grid grid-cols-2 gap-x-4 gap-y-10 sm:gap-x-6 lg:grid-cols-3 xl:grid-cols-4">
       {products.map((product, i) => (
         <li key={product.id}>
-          <ProductCard product={product} priority={i < priorityCount} />
+          <ProductCard product={product} priority={i < priorityCount} headingLevel={headingLevel} />
         </li>
       ))}
     </ul>

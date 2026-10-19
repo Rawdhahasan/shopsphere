@@ -49,7 +49,7 @@ function AccountNavWithActive() {
 
 export function AccountNav() {
   return (
-    <nav aria-label="Account">
+    <nav aria-label="My account">
       {/* The active highlight needs the URL, which isn't known ahead of time on /addresses/[id]. */}
       <Suspense fallback={<AccountNavList pathname={null} />}>
         <AccountNavWithActive />
