@@ -4,7 +4,6 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { RotateCcw, ShieldCheck, Truck } from "lucide-react";
 import { Container, Skeleton } from "@/components/ui";
-import { siteConfig } from "@/config/site";
 import { Breadcrumbs } from "@/features/catalog/components/breadcrumbs";
 import { ProductGrid } from "@/features/catalog/components/product-card";
 import { ProductReviews } from "@/features/catalog/components/product-reviews";
@@ -18,6 +17,7 @@ import { isInWishlist } from "@/features/wishlist/server";
 import { submitReview } from "@/features/reviews/actions";
 import { ReviewForm } from "@/features/reviews/components/review-form";
 import { getMyReview } from "@/features/reviews/server";
+import { getStoreSettings, shippingPromise } from "@/features/store/settings";
 import { getSessionUser } from "@/lib/auth/session";
 import {
   getProduct,
@@ -54,9 +54,10 @@ export default function ProductPage(props: PageProps<"/products/[slug]">) {
 async function ProductContent({ params }: PageProps<"/products/[slug]">) {
   const product = await getProduct((await params).slug);
   if (!product) notFound();
-  const [reviews, related] = await Promise.all([
+  const [reviews, related, settings] = await Promise.all([
     getProductReviews(product.id),
     getRelatedProducts(product.id, product.categoryId),
+    getStoreSettings(),
   ]);
 
   return (
@@ -114,7 +115,7 @@ async function ProductContent({ params }: PageProps<"/products/[slug]">) {
         <ul className="mt-12 grid gap-4 border-y border-line py-6 text-sm sm:grid-cols-3">
           <li className="flex items-center gap-3">
             <Truck className="size-5 text-accent" strokeWidth={1.5} aria-hidden="true" />
-            {siteConfig.announcement}
+            {shippingPromise(settings)}
           </li>
           <li className="flex items-center gap-3">
             <RotateCcw className="size-5 text-accent" strokeWidth={1.5} aria-hidden="true" />

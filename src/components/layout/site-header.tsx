@@ -42,7 +42,15 @@ function MainNavWithActive() {
  * `account` and `cart` are rendered by the server (they read the session and
  * cart cookie), so they're passed in as slots.
  */
-export function SiteHeader({ account, cart }: { account: ReactNode; cart: ReactNode }) {
+export function SiteHeader({
+  account,
+  cart,
+  announcement,
+}: {
+  account: ReactNode;
+  cart: ReactNode;
+  announcement: string;
+}) {
   const [menuOpen, setMenuOpen] = useState(false);
   const closeMenu = () => setMenuOpen(false);
 
@@ -60,7 +68,7 @@ export function SiteHeader({ account, cart }: { account: ReactNode; cart: ReactN
   return (
     <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
       <div className="bg-ink py-2 text-center text-xs tracking-wide text-canvas">
-        {siteConfig.announcement}
+        {announcement}
       </div>
       <Container className="flex h-16 items-center gap-4 lg:h-20">
         <button

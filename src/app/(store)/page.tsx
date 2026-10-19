@@ -5,9 +5,10 @@ import { buttonVariants, Container, Eyebrow } from "@/components/ui";
 import { siteConfig } from "@/config/site";
 import { ProductGrid } from "@/features/catalog/components/product-card";
 import { getFeaturedProducts, listCategories } from "@/features/catalog/queries";
+import { getStoreSettings, shippingPromise } from "@/features/store/settings";
 import { publicStorageUrl } from "@/lib/supabase/storage";
 
-const promises = [
+const promises = (shipping: string) => [
   {
     icon: Leaf,
     title: "Thoughtfully made",
@@ -15,7 +16,7 @@ const promises = [
   },
   {
     icon: Truck,
-    title: "Free shipping over $150",
+    title: shipping,
     body: "Carefully packed and tracked from our studio to your door.",
   },
   {
@@ -26,7 +27,11 @@ const promises = [
 ];
 
 export default async function HomePage() {
-  const [featured, categories] = await Promise.all([getFeaturedProducts(8), listCategories()]);
+  const [featured, categories, settings] = await Promise.all([
+    getFeaturedProducts(8),
+    listCategories(),
+    getStoreSettings(),
+  ]);
   const heroImage = publicStorageUrl("category-images", "categories/living.webp");
   const storyImage = publicStorageUrl("category-images", "categories/kitchen-dining.webp");
 
@@ -219,7 +224,7 @@ export default async function HomePage() {
           Our promises
         </h2>
         <Container className="grid gap-10 py-14 md:grid-cols-3">
-          {promises.map(({ icon: Icon, title, body }) => (
+          {promises(shippingPromise(settings)).map(({ icon: Icon, title, body }) => (
             <div key={title} className="flex gap-4">
               <Icon
                 className="mt-1 size-5 shrink-0 text-accent"
