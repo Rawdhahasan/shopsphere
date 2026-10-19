@@ -170,4 +170,4 @@ Next ideas: transactional emails through a custom domain, CAPTCHA on sign-up, an
 
 ## License
 
-Source code © Rawdha Hasan. Product photography is from Unsplash, used under the Unsplash License; photographers are credited in [docs/IMAGE_CREDITS.md](docs/IMAGE_CREDITS.md). Product names, descriptions and prices are invented.
+Source code © 2026 Rawdha Hasan. **All rights reserved**: the code is public to view as a portfolio, but it may not be copied or reused without written permission (see [LICENSE](LICENSE)). Product photography is from Unsplash, used under the Unsplash License; photographers are credited in [docs/IMAGE_CREDITS.md](docs/IMAGE_CREDITS.md). Product names, descriptions and prices are invented.
