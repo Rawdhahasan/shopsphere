@@ -67,15 +67,32 @@ Roles live in `profiles.role`. Sign-up always creates a `customer`. A trigger st
 
 ## Money and checkout
 
-- All amounts are integer cents.
-- `lib/pricing/calculate-totals.ts` is the only place totals are computed. The browser sends variant IDs and quantities, never prices.
-- Checkout flow (Phase 6):
-  1. The server validates the cart, loads prices from the database and applies the discount code.
-  2. A database function atomically **reserves stock** (`stock >= quantity` or fail) and creates a `pending_payment` order.
-  3. The customer pays on Stripe's hosted Checkout page. Card data never touches ShopSphere.
-  4. The webhook verifies Stripe's signature, records the event ID (`stripe_events`) so retries are ignored, and marks the order `paid`.
-  5. Expired or abandoned sessions release the reserved stock.
+- All amounts are integer cents. `lib/pricing/calculate-totals.ts` is the only place totals are computed, on the server, from database prices. The browser sends variant ids, quantities, an address id and a discount code, never prices.
+- Checkout (`src/features/checkout`):
+  1. `placeOrder` re-reads the cart, checks the address belongs to the shopper and validates the discount code (active, dates, minimum, uses left).
+  2. The shopper's earlier unpaid checkouts are settled first (paid if Stripe says so, otherwise their stock is returned), and expired ones are swept.
+  3. `reserve_order()` creates a `pending_payment` order and its items and takes the stock **in one transaction**, re-checking every price and quantity. Two shoppers can never buy the last unit, and a price that changed since the cart was totalled is refused.
+  4. With a Stripe test key, the shopper pays on Stripe Checkout (line items, shipping, tax, and a one-off coupon for the discount). Card data never touches ShopSphere. Without a key, a clearly labelled **demo mode** confirms the order straight away.
+  5. The order becomes `paid` through `mark_order_paid()` (idempotent; counts the discount once; removes the bought items from the cart) only when Stripe's `amount_total` equals the order total. This happens from the signature-verified webhook (`/api/stripe/webhook`, events recorded in `stripe_events`) or from the success page, which asks Stripe directly, so orders are right even before the webhook arrives.
+  6. Expired or cancelled sessions call `release_order()`, which returns the stock. A shopper's own unpaid reservation still counts as available to them in the cart.
+- Refunds (`refund_order()`, admins only, through a Server Action) work for paid orders that haven't shipped, refund on Stripe first when connected, and return the items to stock.
+
+## Admin
+
+- Every admin page, data function and Server Action calls `requireAdmin()` itself (see the pitfall above); admin writes use the admin's own Supabase client, so RLS and database guards apply too.
+- Order status changes go through `guard_order_update()`: paid → processing → shipped (with carrier and tracking number) → delivered. Money and payment fields can't be edited.
+- Stock changes go through `adjust_variant_stock()`, which refuses to go below zero and writes `inventory_movements`. Checkout reservations, releases and refunds log their own movements, so the inventory page shows a complete history.
+- Product options are edited as text (`Color: Ivory #EEE8DD, Rust #B25A33`); saving creates a variant for every new combination and switches off variants whose combination no longer exists, so order history keeps them.
+- Catalog and settings changes call `updateTag("catalog")`, so the cached storefront updates on the next request.
+- Analytics (`src/features/admin/analytics`) count paid orders only, compare each figure with the previous period of the same length, and draw revenue per day as columns (sales are discrete days). Charts use one hue, `--color-chart`, the accent nudged richer to pass the dataviz palette validator.
 
 ## Security headers
 
-`next.config.ts` sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and `Permissions-Policy` on every response. A Content Security Policy is added in Phase 11, once all third-party origins are known.
+`next.config.ts` sets `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy` and `Permissions-Policy` on every response. Production builds add:
+
+- **Content-Security-Policy:** scripts only from this site, images and API calls also to `*.supabase.co`, no framing (`frame-ancestors 'none'`), no plugins, forms only to this site. `'unsafe-inline'` scripts are allowed because Next.js's static shell can't carry per-request nonces without making every page dynamic. `upgrade-insecure-requests` is only added on HTTPS deployments.
+- **Strict-Transport-Security** for two years, including subdomains.
+
+## Accessibility
+
+axe-core (WCAG 2.1 A/AA plus best practice) reports no violations on the store, account and admin pages. Text colours meet 4.5:1, every page has a skip link and landmarks, forms label every field and announce errors, the variant picker exposes sold-out and unavailable choices to screen readers, and charts have a keyboard-accessible tooltip plus a table view.

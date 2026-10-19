@@ -2,12 +2,16 @@
 
 Migrations live in [`supabase/migrations`](../supabase/migrations) and run in filename order:
 
-| File                              | Contents                            |
-| --------------------------------- | ----------------------------------- |
-| `…001_initial_schema.sql`         | Enums, tables, constraints, indexes |
-| `…002_functions_and_triggers.sql` | Business rules enforced by triggers |
-| `…003_row_level_security.sql`     | Who can read and write each table   |
-| `…004_storage.sql`                | Image buckets and upload rules      |
+| File                              | Contents                                                  |
+| --------------------------------- | --------------------------------------------------------- |
+| `…001_initial_schema.sql`         | Enums, tables, constraints, indexes                       |
+| `…002_functions_and_triggers.sql` | Business rules enforced by triggers                       |
+| `…003_row_level_security.sql`     | Who can read and write each table                         |
+| `…004_storage.sql`                | Image buckets and upload rules                            |
+| `…005_foreign_key_indexes.sql`    | Indexes for foreign keys                                  |
+| `…006_public_reviews.sql`         | `get_product_reviews()` for product pages                 |
+| `…007_checkout.sql`               | `reserve_order()`, `mark_order_paid()`, `release_order()` |
+| `…008_refunds.sql`                | `refund_order()`                                          |
 
 ## Entity overview
 
@@ -53,6 +57,18 @@ Every product has **at least one variant**. Price, SKU and stock always live on 
 | One default address per customer                             | partial unique index + `manage_default_address` trigger                                          |
 | Each order has a tracking timeline                           | `log_order_status` trigger writes `order_status_history`                                         |
 | Every manual stock change is audited                         | `adjust_variant_stock()` writes `inventory_movements`                                            |
+
+## Checkout functions
+
+Called only by trusted server code (the service role); visitors and customers get "permission denied".
+
+| Function                                  | What it does                                                                                                                                                                                                                                                  |
+| ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `reserve_order(...)`                      | Locks each variant, checks it's for sale at the expected price with enough stock, then creates a `pending_payment` order with its items and takes the stock, all in one transaction. Fails with `OUT_OF_STOCK:<sku>`, `PRICE_CHANGED:<sku>` or `UNAVAILABLE`. |
+| `mark_order_paid(order, session, intent)` | Pending → paid, once. Counts the discount code and removes the bought items from the shopper's cart. Returns `false` if already done.                                                                                                                         |
+| `release_order(order)`                    | Cancels an unpaid order and returns its stock.                                                                                                                                                                                                                |
+| `refund_order(order)`                     | Refunds a paid or processing order and returns its stock (`return` movements).                                                                                                                                                                                |
+| `get_product_reviews(product)`            | Approved reviews of an active product with a privacy-safe author name ("Ava T."). Callable by anyone.                                                                                                                                                         |
 
 ## Access summary (RLS)
 
