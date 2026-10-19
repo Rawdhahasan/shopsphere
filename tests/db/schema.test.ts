@@ -520,6 +520,30 @@ describe("checkout", () => {
     expect(saved.status).toBe("cancelled");
   });
 
+  it("refunds an unshipped order once, returning its stock", async () => {
+    const before = await stockOf(oak);
+    const order = await reserve([line(oak, 49000, 1)]);
+    await service(() => db.query("select public.mark_order_paid($1)", [order.order_id]));
+    const refund = () =>
+      service(() =>
+        rows<{ refunded: boolean }>("select public.refund_order($1, 'Changed mind') as refunded", [
+          order.order_id,
+        ]),
+      );
+    expect((await refund())[0].refunded).toBe(true);
+    expect((await refund())[0].refunded).toBe(false);
+    expect(await stockOf(oak)).toBe(before);
+    const history = await rows<{ status: string }>(
+      "select status from public.order_status_history where order_id = $1 order by created_at",
+      [order.order_id],
+    );
+    expect(history.map((h) => h.status)).toEqual(["pending_payment", "paid", "refunded"]);
+    await expectError(
+      user(ids.admin, () => db.query("select public.refund_order($1)", [order.order_id])),
+      /permission denied/,
+    );
+  });
+
   it("can't be called by visitors or customers", async () => {
     for (const run of [anon, <T>(fn: () => Promise<T>) => user(ids.alice, fn)]) {
       await expectError(

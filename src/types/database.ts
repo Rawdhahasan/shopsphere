@@ -983,6 +983,10 @@ export type Database = {
         Args: { p_product_id: string }
         Returns: undefined
       }
+      refund_order: {
+        Args: { p_note?: string; p_order_id: string }
+        Returns: boolean
+      }
       release_order: {
         Args: { p_note?: string; p_order_id: string }
         Returns: boolean
