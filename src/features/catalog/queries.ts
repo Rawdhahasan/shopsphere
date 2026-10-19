@@ -366,3 +366,13 @@ export async function getProductCards(ids: string[]): Promise<ProductCardData[]>
   const cards = new Map((data as unknown as CardRow[]).map((row) => [row.id, toCard(row)]));
   return ids.flatMap((id) => cards.get(id) ?? []);
 }
+
+/** Every product for the sitemap (active only, through RLS). */
+export async function listSitemapProducts(): Promise<{ slug: string; updatedAt: string }[]> {
+  "use cache";
+  cacheCatalog();
+  if (!isSupabaseConfigured()) return [];
+  const { data, error } = await createPublicClient().from("products").select("slug, updated_at");
+  if (error) throw new Error(`Couldn't load products for the sitemap: ${error.message}`);
+  return data.map((p) => ({ slug: p.slug, updatedAt: p.updated_at }));
+}
