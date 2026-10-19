@@ -1,5 +1,6 @@
 import { NextResponse, type NextRequest } from "next/server";
 import type { EmailOtpType } from "@supabase/supabase-js";
+import { mergeGuestCartIntoAccount } from "@/features/cart/server";
 import { safeRedirectPath } from "@/lib/auth/routes";
 import { createClient } from "@/lib/supabase/server";
 
@@ -35,6 +36,11 @@ export async function GET(request: NextRequest) {
   } else if (tokenHash && type && OTP_TYPES.includes(type)) {
     const { error } = await supabase.auth.verifyOtp({ token_hash: tokenHash, type });
     ok = !error;
+  }
+
+  if (ok) {
+    const { data } = await supabase.auth.getUser();
+    if (data.user) await mergeGuestCartIntoAccount(data.user.id, supabase);
   }
 
   return NextResponse.redirect(new URL(ok ? next : "/login?error=link", origin));

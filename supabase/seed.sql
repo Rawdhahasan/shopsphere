@@ -48,7 +48,29 @@ insert into public.products (id, category_id, name, slug, short_description, des
   ('07c4479c-7797-5bc0-a72a-4fa6dc5f8f2c', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Ribbed Pillar Candle', 'ribbed-pillar-candle', 'An unscented, hand-poured pillar candle with a fluted profile.', 'Poured by hand from a blend of rapeseed and coconut wax, these candles burn slowly and cleanly. They''re unscented, so they''ll sit happily on a dinner table, and the fluted sides cast soft shadows as they burn.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Small Ø 7 × H 10 cm · Tall Ø 7 × H 15 cm"},{"label":"Burn time","value":"Small approx. 30 hours · Tall approx. 45 hours"},{"label":"Materials","value":"Rapeseed and coconut wax, cotton wick"}]'::jsonb, 'active', false, '2026-08-02T00:00:00.000Z'),
   ('a27d8056-bba4-5e51-b0bd-044c69c4809c', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Tidal Woven Baskets, Set of 3', 'tidal-woven-baskets', 'Three nesting baskets hand-woven from natural palm leaf.', 'Hand-woven in a herringbone pattern from sun-dried palm leaf, the baskets nest for storage and work alone for throws, toys, plants or fruit. Every set is made by a small cooperative of weavers.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Ø 22, 28 and 34 cm"},{"label":"Materials","value":"Natural palm leaf"},{"label":"Care","value":"Keep dry; brush off dust"}]'::jsonb, 'active', false, '2026-07-30T00:00:00.000Z'),
   ('f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Linden Round Mirror', 'linden-round-mirror', 'A clean round mirror in a slim solid-oak frame.', 'A mirror that brightens a hallway or bathroom without competing with the rest of the room. The frame is solid oak, finished with a clear matte oil, and the glass is copper-free for a long, clear life.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Ø 60 cm or Ø 80 cm · frame depth 3 cm"},{"label":"Materials","value":"Solid oak frame, copper-free mirror glass"},{"label":"Mounting","value":"Fixings included; hangs from a single hook"}]'::jsonb, 'active', false, '2026-07-27T00:00:00.000Z'),
-  ('26efccfd-b4e5-55a1-9cda-7b3f4c57001a', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Travertine Bookends', 'travertine-bookends', 'A pair of solid travertine bookends. Coming soon.', 'Cut from honed travertine with a slight natural pitting, the bookends are heavy enough to hold a full shelf. Draft product: visible to admins only until photography is ready.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"W 12 × D 10 × H 15 cm each"},{"label":"Materials","value":"Honed travertine, felt base"}]'::jsonb, 'draft', false, null)
+  ('26efccfd-b4e5-55a1-9cda-7b3f4c57001a', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Travertine Bookends', 'travertine-bookends', 'A pair of solid travertine bookends. Coming soon.', 'Cut from honed travertine with a slight natural pitting, the bookends are heavy enough to hold a full shelf. Draft product: visible to admins only until photography is ready.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"W 12 × D 10 × H 15 cm each"},{"label":"Materials","value":"Honed travertine, felt base"}]'::jsonb, 'draft', false, null),
+  ('0a7b8d13-a835-577f-945a-11996dafeecc', 'bb6f077c-d902-50aa-a126-bc75ac95ce93', 'Ivory Fringed Wool Rug', 'ivory-fringed-wool-rug', 'A hand-knotted wool rug in soft ivory with a tonal border and knotted fringe.', 'Knotted by hand from undyed New Zealand wool, this rug has a low, dense pile that feels soft underfoot and wears beautifully. A quiet tonal border frames the field, and the fringe is finished by hand at each end.
+
+Wool is naturally stain-resistant and slow to show wear, which makes it a good choice for living rooms that are actually lived in.', 'ShopSphere Studio', '[{"label":"Materials","value":"100% undyed wool, cotton warp"},{"label":"Pile height","value":"8 mm"},{"label":"Care","value":"Vacuum without the beater bar; professional clean"},{"label":"Lead time","value":"Ships in 1–2 weeks"}]'::jsonb, 'active', false, '2026-10-16T00:00:00.000Z'),
+  ('b550857e-b092-5789-ba00-6b679fa3e7c5', 'bb6f077c-d902-50aa-a126-bc75ac95ce93', 'Pebble Walnut Coffee Table', 'pebble-walnut-coffee-table', 'An organic, pebble-shaped coffee table in solid walnut with a soft oiled finish.', 'No sharp corners, no hard lines: Pebble''s top is shaped like a river stone and sits on three sculpted legs. It''s cut from solid American black walnut and finished with a hard-wax oil that deepens in colour over the years.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"W 110 × D 68 × H 36 cm"},{"label":"Materials","value":"Solid American black walnut, hard-wax oil"},{"label":"Care","value":"Wipe with a damp cloth; re-oil once a year"},{"label":"Lead time","value":"Ships in 2–3 weeks"}]'::jsonb, 'active', false, '2026-10-12T00:00:00.000Z'),
+  ('2912c8c6-113b-5e1a-8fe7-565f8d2be8ae', 'bb6f077c-d902-50aa-a126-bc75ac95ce93', 'Reed Fluted Oak Sideboard', 'reed-fluted-oak-sideboard', 'A long, low sideboard with fluted oak doors and soft-close storage.', 'Reed''s sliding doors are made of fine vertical flutes that catch the light and hide the clutter. Inside, two adjustable shelves and a cable cut-out make it just as useful under a television as in a dining room.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"W 180 × D 45 × H 72 cm"},{"label":"Materials","value":"Oak veneer on FSC-certified board, solid oak legs"},{"label":"Storage","value":"2 sliding doors, 2 adjustable shelves, cable outlet"},{"label":"Lead time","value":"Ships in 3–4 weeks"}]'::jsonb, 'active', true, '2026-10-17T00:00:00.000Z'),
+  ('a7c3189b-64f7-537e-8b31-19777335d815', 'bb6f077c-d902-50aa-a126-bc75ac95ce93', 'Tove Linen Cushion', 'tove-linen-cushion', 'A stonewashed linen cushion with a feather insert and hidden zip.', 'Tove''s cover is woven from European flax and stonewashed until it drapes softly. The feather-and-down insert is generously filled, so the cushion holds its shape and takes a satisfying karate chop.', 'ShopSphere Studio', '[{"label":"Size","value":"50 × 50 cm"},{"label":"Materials","value":"100% linen cover, feather and down insert"},{"label":"Care","value":"Cover machine washable at 40°C"}]'::jsonb, 'active', false, '2026-10-09T00:00:00.000Z'),
+  ('5029ee34-3737-5a70-8d01-4d0343882741', 'a4dcb23e-cf96-5523-9d01-fec74c3890b0', 'Saga Oak Dining Table', 'saga-oak-dining-table', 'A solid oak dining table with a softly bevelled top, made for long dinners.', 'Saga is built from solid European oak with traditional mortise-and-tenon joints, so it will outlast many sets of chairs. The edges of the top are gently bevelled, which makes it look lighter than it is, and the matt lacquer stands up to everyday spills.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"6-seat: L 180 × W 90 × H 75 cm · 8-seat: L 220 × W 95 × H 75 cm"},{"label":"Materials","value":"Solid FSC-certified European oak, matt lacquer"},{"label":"Care","value":"Wipe with a damp cloth; use coasters for hot dishes"},{"label":"Lead time","value":"Made to order, ships in 5–6 weeks"}]'::jsonb, 'active', true, '2026-10-14T00:00:00.000Z'),
+  ('e3715004-ac46-57f0-85f6-4c51e953bfc9', 'a4dcb23e-cf96-5523-9d01-fec74c3890b0', 'Hearth Enameled Dutch Oven', 'hearth-enameled-dutch-oven', 'Enameled cast iron for slow braises, stews and crusty sourdough.', 'Heavy cast iron holds an even heat for hours, and the smooth enamel inside needs no seasoning. The tight-fitting lid keeps moisture in for braises and steam in for bread. It goes from hob to oven to table, and works on every heat source including induction.', 'ShopSphere Studio', '[{"label":"Capacity","value":"4.5 qt (4.3 L) or 6.5 qt (6.2 L)"},{"label":"Materials","value":"Enameled cast iron, stainless steel knob"},{"label":"Heat sources","value":"Gas, electric, induction; oven safe to 260°C"},{"label":"Care","value":"Dishwasher safe; hand washing keeps the enamel glossy"}]'::jsonb, 'active', false, '2026-10-11T00:00:00.000Z'),
+  ('55125f0c-2538-5e61-860b-b90c472b9e8c', 'a4dcb23e-cf96-5523-9d01-fec74c3890b0', 'Dune Stoneware Mugs, Set of 4', 'dune-stoneware-mugs', 'Wheel-thrown stoneware mugs with a speckled glaze and an unglazed foot.', 'Each Dune mug is thrown on the wheel, so no two are quite alike. A speckled, oatmeal glaze breaks over the rim, and the raw clay foot shows how the piece was made. They hold a generous 350 ml and sit well in two hands.', 'ShopSphere Studio', '[{"label":"Capacity","value":"350 ml each"},{"label":"Materials","value":"Stoneware, lead-free glaze"},{"label":"Care","value":"Dishwasher and microwave safe"}]'::jsonb, 'active', false, '2026-10-07T00:00:00.000Z'),
+  ('b3d597fe-3c99-5a19-8a1c-79b82199a2db', 'a4dcb23e-cf96-5523-9d01-fec74c3890b0', 'Aria Hand-Blown Wine Glasses, Set of 2', 'aria-hand-blown-wine-glasses', 'Thin, mouth-blown glasses with a fine rim and a long, slender stem.', 'Aria glasses are blown by hand from lead-free crystal, which lets the rim be finer than machine-made glass. The tall, gently tapered bowl suits both whites and lighter reds.', 'ShopSphere Studio', '[{"label":"Capacity","value":"450 ml each"},{"label":"Height","value":"23 cm"},{"label":"Materials","value":"Lead-free crystal, mouth-blown"},{"label":"Care","value":"Hand wash recommended"}]'::jsonb, 'active', false, '2026-10-05T00:00:00.000Z'),
+  ('a9c01daf-19bf-56d5-b864-15f6bcbf581e', '0333658c-752b-577d-ada8-d213ddc23297', 'Cloudrest Duvet Insert', 'cloudrest-duvet-insert', 'An all-season down-alternative duvet that''s light, warm and machine washable.', 'Cloudrest is filled with fine recycled microfibre that lofts like down, without the feathers. Baffle-box stitching keeps the fill evenly spread, and the breathable cotton shell keeps you comfortable from autumn to spring.', 'ShopSphere Studio', '[{"label":"Materials","value":"Organic cotton shell, recycled microfibre fill"},{"label":"Warmth","value":"All-season (medium weight)"},{"label":"Care","value":"Machine wash at 40°C; tumble dry low"}]'::jsonb, 'active', false, '2026-10-13T00:00:00.000Z'),
+  ('099ca9cf-1573-58c0-9f5d-3feea9721c4d', '0333658c-752b-577d-ada8-d213ddc23297', 'Mulberry Silk Pillowcase', 'mulberry-silk-pillowcase', 'A 22-momme mulberry silk pillowcase that''s cool, smooth and kind to hair.', 'Woven from long-fibre mulberry silk, this pillowcase feels cool to the touch and reduces friction, so hair tangles less and skin isn''t creased by the morning. An envelope closure keeps the pillow in place without a zip.', 'ShopSphere Studio', '[{"label":"Size","value":"Standard, 51 × 76 cm"},{"label":"Materials","value":"100% mulberry silk, 22 momme"},{"label":"Care","value":"Hand wash or delicate cycle in a mesh bag; air dry"}]'::jsonb, 'active', false, '2026-10-08T00:00:00.000Z'),
+  ('36b70a89-8bdb-5b41-86dd-3115221a8e6f', '0333658c-752b-577d-ada8-d213ddc23297', 'Rhea Oak Spindle Bed', 'rhea-oak-spindle-bed', 'A light, airy bed frame with a spindle headboard in solid oak.', 'Rhea''s headboard is made of turned oak spindles that let light and air pass through, so even a small bedroom feels open. The frame is solid oak throughout, with a sprung slatted base included and no need for a box spring.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Queen: W 168 × L 215 cm · King: W 208 × L 215 cm · headboard H 100 cm"},{"label":"Materials","value":"Solid FSC-certified oak, birch slats"},{"label":"Includes","value":"Sprung slatted base; mattress not included"},{"label":"Lead time","value":"Ships in 3–4 weeks"}]'::jsonb, 'active', true, '2026-10-15T00:00:00.000Z'),
+  ('fafd7d8a-a238-562b-b1ee-a269eace2bc7', '0333658c-752b-577d-ada8-d213ddc23297', 'Sora Seagrass Laundry Basket', 'sora-seagrass-laundry-basket', 'A hand-woven seagrass basket with handles, for laundry, throws or toys.', 'Sora is woven by hand from natural seagrass in a tight, sturdy weave. The rolled top folds down for a lower profile, and two woven handles make it easy to carry to the wash.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Ø 40 × H 50 cm"},{"label":"Materials","value":"Natural seagrass"},{"label":"Care","value":"Wipe with a dry cloth; keep away from damp"}]'::jsonb, 'active', false, '2026-10-04T00:00:00.000Z'),
+  ('6f0331b8-38fd-527d-a435-dab4278e85ca', 'e6f8717c-1b0d-5e7a-a709-e3021a01fa88', 'Waffle Weave Shower Curtain', 'waffle-weave-shower-curtain', 'A heavyweight cotton waffle curtain with a woven band, quick-drying and soft.', 'A deep waffle weave gives this curtain body and texture, and the cotton dries quickly between showers. A woven band near the top adds a quiet detail. Hang it on its own or with a liner.', 'ShopSphere Studio', '[{"label":"Size","value":"180 × 180 cm"},{"label":"Materials","value":"100% cotton, reinforced buttonholes"},{"label":"Care","value":"Machine wash at 40°C"}]'::jsonb, 'active', false, '2026-10-10T00:00:00.000Z'),
+  ('792005ac-7d53-59b9-a121-1c227f6dfa21', 'e6f8717c-1b0d-5e7a-a709-e3021a01fa88', 'Pure Olive Bar Soap, Set of 3', 'pure-olive-bar-soap', 'Cold-process olive oil soap that''s gentle, unscented and long-lasting.', 'Made in small batches from olive oil and cured for eight weeks, these bars give a creamy lather and last far longer than ordinary soap. They''re unscented and suitable for sensitive skin, face and hands alike.', 'ShopSphere Studio', '[{"label":"Weight","value":"3 × 120 g"},{"label":"Ingredients","value":"Saponified olive oil, water, sea salt"},{"label":"Care","value":"Keep dry between uses to make each bar last"}]'::jsonb, 'active', false, '2026-10-03T00:00:00.000Z'),
+  ('b28ae653-0822-5ae8-aef3-31cee5e5b35a', 'e6f8717c-1b0d-5e7a-a709-e3021a01fa88', 'Waffle Hand Towels, Set of 2', 'waffle-hand-towels', 'Light, absorbent waffle-weave cotton hand towels with a hanging loop.', 'Waffle weave is lighter than terry but just as absorbent, and it dries much faster. These towels soften with every wash, and a cotton loop lets them hang neatly from a hook.', 'ShopSphere Studio', '[{"label":"Size","value":"50 × 90 cm each"},{"label":"Materials","value":"100% Turkish cotton"},{"label":"Care","value":"Machine wash at 60°C; tumble dry low"}]'::jsonb, 'active', false, '2026-10-06T00:00:00.000Z'),
+  ('24daaeca-be9d-5063-bccc-927875c78355', 'e6f8717c-1b0d-5e7a-a709-e3021a01fa88', 'Ash Wood Bath Tray', 'ash-wood-bath-tray', 'A slatted ash tray that rests across the tub for a book, candle or cup of tea.', 'Made from solid ash with an oiled, water-resistant finish, the tray sits securely across most bathtubs. The gaps between the slats let water drain away, and non-slip pads underneath keep it steady.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"L 75 × W 20 × H 3 cm"},{"label":"Materials","value":"Solid ash, natural oil finish"},{"label":"Care","value":"Wipe dry after use; re-oil occasionally"}]'::jsonb, 'active', false, '2026-10-02T00:00:00.000Z'),
+  ('bbd10718-95bb-57aa-852f-011123f00025', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Arch Floor Mirror', 'arch-floor-mirror', 'A full-length arched mirror with a slim metal frame, to lean or hang.', 'A tall arch brings a soft, architectural shape to a hallway or bedroom and bounces light around the room. The slim powder-coated frame keeps it minimal, and it can lean against a wall or hang from the included cleat.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"W 70 × H 170 cm"},{"label":"Materials","value":"Powder-coated steel frame, 5 mm safety-backed glass"},{"label":"Includes","value":"Wall cleat and anti-tip strap"}]'::jsonb, 'active', true, '2026-10-16T12:00:00.000Z'),
+  ('67ed9dc2-758d-5780-9472-d095ead17f01', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Beeswax Taper Candles, Set of 6', 'beeswax-taper-candles', 'Hand-dipped beeswax tapers with a warm glow and a faint scent of honey.', 'Dipped by hand in pure beeswax, these tapers burn cleanly and slowly with a bright, warm flame. They fit standard candlesticks and give about eight hours of light each.', 'ShopSphere Studio', '[{"label":"Size","value":"H 25 cm, Ø 2.2 cm"},{"label":"Materials","value":"100% beeswax, cotton wick"},{"label":"Burn time","value":"About 8 hours each"}]'::jsonb, 'active', false, '2026-10-01T12:00:00.000Z'),
+  ('fab9e51e-5d04-5282-9092-211bd0f2ae7f', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Celadon Bud Planter', 'celadon-bud-planter', 'A small stoneware planter in a crackled celadon glaze, with a drainage hole.', 'The soft green celadon glaze crackles as it cools in the kiln, so every planter has its own pattern. A drainage hole and cork plug let you choose between a happy plant and a dry shelf.', 'ShopSphere Studio', '[{"label":"Dimensions","value":"Small: Ø 11 × H 10 cm · Large: Ø 16 × H 14 cm"},{"label":"Materials","value":"Glazed stoneware, cork plug"},{"label":"Care","value":"Wipe clean; frost sensitive"}]'::jsonb, 'active', false, '2026-10-09T12:00:00.000Z'),
+  ('ae717e2a-f8e8-57c8-8e0d-3bf391352ec6', '253c7483-2c30-5c32-90b4-d8745757c79e', 'Cone Brass Candlesticks, Set of 3', 'cone-brass-candlesticks', 'Three solid brass candlesticks in graduated heights, on slender cone bases.', 'Cast in solid brass and finished by hand, these candlesticks are weighted to stand steady. Grouped in three heights they make a small skyline on a table or mantel, and the unlacquered brass develops a soft patina over time.', 'ShopSphere Studio', '[{"label":"Heights","value":"18, 23 and 28 cm"},{"label":"Materials","value":"Solid unlacquered brass"},{"label":"Fits","value":"Standard taper candles, 2.2 cm"}]'::jsonb, 'active', false, '2026-10-12T12:00:00.000Z')
 on conflict (id) do nothing;
 
 insert into public.product_images (id, product_id, storage_path, alt_text, position) values
@@ -79,7 +101,27 @@ insert into public.product_images (id, product_id, storage_path, alt_text, posit
   ('4060cb14-926a-5504-887d-c9778b35562c', 'ddd61bd3-6d46-5333-9362-0f1b366ee6c7', 'products/ridge-ceramic-vase/1.webp', 'Ridge Ceramic Vase in matte white on a marble plinth', 0),
   ('b18dc9f2-103d-52c8-8149-182341ee737a', '07c4479c-7797-5bc0-a72a-4fa6dc5f8f2c', 'products/ribbed-pillar-candle/1.webp', 'Ribbed Pillar Candle in ivory held in a hand', 0),
   ('dda7cd5b-2e8b-52c2-95ea-cc5b7f50e00f', 'a27d8056-bba4-5e51-b0bd-044c69c4809c', 'products/tidal-woven-baskets/1.webp', 'Tidal Woven Baskets nested together', 0),
-  ('6161998c-ae69-531f-9bb1-a47bdf1a2919', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'products/linden-round-mirror/1.webp', 'Linden Round Mirror with an oak frame above an entryway bench', 0)
+  ('6161998c-ae69-531f-9bb1-a47bdf1a2919', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'products/linden-round-mirror/1.webp', 'Linden Round Mirror with an oak frame above an entryway bench', 0),
+  ('33793f3f-dcfe-572f-a4f8-f5a832e45383', '0a7b8d13-a835-577f-945a-11996dafeecc', 'products/ivory-fringed-wool-rug/1.webp', 'Ivory Fringed Wool Rug partly rolled, showing its tonal border and knotted fringe', 0),
+  ('a56a8a0d-ad66-5598-94a9-77e05ec70227', 'b550857e-b092-5789-ba00-6b679fa3e7c5', 'products/pebble-walnut-coffee-table/1.webp', 'Pebble Walnut Coffee Table with an open book and a mug in front of a sofa', 0),
+  ('f0f3ed1b-1c8e-5856-9e5e-87907fec8197', '2912c8c6-113b-5e1a-8fe7-565f8d2be8ae', 'products/reed-fluted-oak-sideboard/1.webp', 'Reed Fluted Oak Sideboard styled with a table lamp, books and a sculptural vase', 0),
+  ('fd525717-4492-54e0-af1b-28e140526d1f', 'a7c3189b-64f7-537e-8b31-19777335d815', 'products/tove-linen-cushion/1.webp', 'Tove Linen Cushions in ivory and rust stacked on a striped rug', 0),
+  ('6bc2cdde-cf09-5b96-9672-7c1cc8ebaaef', '5029ee34-3737-5a70-8d01-4d0343882741', 'products/saga-oak-dining-table/1.webp', 'Saga Oak Dining Table with eight chairs under pendant lights in a bright room', 0),
+  ('b7fa6e5e-39d5-5064-9c58-f27ac0765ac8', 'e3715004-ac46-57f0-85f6-4c51e953bfc9', 'products/hearth-enameled-dutch-oven/1.webp', 'Hearth Enameled Dutch Oven in sage with a freshly baked sourdough loaf', 0),
+  ('8b15121c-2f0f-5de4-8f83-7c5bc2ccc446', '55125f0c-2538-5e61-860b-b90c472b9e8c', 'products/dune-stoneware-mugs/1.webp', 'Dune Stoneware Mugs with speckled glaze on an open kitchen shelf', 0),
+  ('1cd1a9b5-2d4e-51df-b9e6-552f545198b0', 'b3d597fe-3c99-5a19-8a1c-79b82199a2db', 'products/aria-hand-blown-wine-glasses/1.webp', 'An Aria hand-blown wine glass of white wine on a stone table', 0),
+  ('dcaca840-2183-5147-8659-33fed3b2702b', 'a9c01daf-19bf-56d5-b864-15f6bcbf581e', 'products/cloudrest-duvet-insert/1.webp', 'Cloudrest Duvet Insert loosely gathered on an unmade bed', 0),
+  ('1117cbf8-0713-51c5-93e3-da79ef6f11f0', '099ca9cf-1573-58c0-9f5d-3feea9721c4d', 'products/mulberry-silk-pillowcase/1.webp', 'A pillow in a Mulberry Silk Pillowcase catching striped morning light', 0),
+  ('a90281e8-bc89-5913-913f-5cd03b8f0643', '36b70a89-8bdb-5b41-86dd-3115221a8e6f', 'products/rhea-oak-spindle-bed/1.webp', 'Rhea Oak Spindle Bed dressed in white linen beside a bedside table and lamp', 0),
+  ('9a7826f6-6a66-513e-a578-435729a7c088', 'fafd7d8a-a238-562b-b1ee-a269eace2bc7', 'products/sora-seagrass-laundry-basket/1.webp', 'Sora Seagrass Laundry Basket with a towel, next to a white chair', 0),
+  ('52dc16bf-088f-5748-967a-ed65e2e559b7', '6f0331b8-38fd-527d-a435-dab4278e85ca', 'products/waffle-weave-shower-curtain/1.webp', 'Waffle Weave Shower Curtain in white with a grey woven band, beside hand towels', 0),
+  ('64f5feb1-afaa-5e7e-82fa-88c982c6e7de', '792005ac-7d53-59b9-a121-1c227f6dfa21', 'products/pure-olive-bar-soap/1.webp', 'Two bars of Pure Olive Bar Soap on grey stone with dried grasses', 0),
+  ('2e1eaf20-0041-52eb-80b5-7f54bb93049e', 'b28ae653-0822-5ae8-aef3-31cee5e5b35a', 'products/waffle-hand-towels/1.webp', 'Waffle Hand Towels in white and charcoal hanging above a bathtub', 0),
+  ('81b5266c-9706-57c2-b0d6-7ec440f758a6', '24daaeca-be9d-5063-bccc-927875c78355', 'products/ash-wood-bath-tray/1.webp', 'Ash Wood Bath Tray across a bathtub with a brush, sponge and a cup', 0),
+  ('7dbb6883-7626-58bb-b613-34d4eebc2d3c', 'bbd10718-95bb-57aa-852f-011123f00025', 'products/arch-floor-mirror/1.webp', 'Arch Floor Mirror leaning against a wall beside two terracotta vessels', 0),
+  ('da785c21-6f46-5221-b681-6f8b742e9d0f', '67ed9dc2-758d-5780-9472-d095ead17f01', 'products/beeswax-taper-candles/1.webp', 'A lit beeswax taper candle in a dark candlestick among winter greenery', 0),
+  ('b0df2a67-a5d6-571f-8543-137d6ae4aa6d', 'fab9e51e-5d04-5282-9092-211bd0f2ae7f', 'products/celadon-bud-planter/1.webp', 'Celadon Bud Planter with a small fern on a pale wooden table', 0),
+  ('95606af8-0f14-5f6c-919b-e911964b1d8e', 'ae717e2a-f8e8-57c8-8e0d-3bf391352ec6', 'products/cone-brass-candlesticks/1.webp', 'Three Cone Brass Candlesticks of different heights on a white background', 0)
 on conflict (id) do nothing;
 
 insert into public.product_options (id, product_id, name, position) values
@@ -100,7 +142,16 @@ insert into public.product_options (id, product_id, name, position) values
   ('9500ecfa-25fc-54a3-8cbc-c050a0daf243', 'a100f37a-8d96-52bf-ab42-37b9f59e5289', 'Size', 1),
   ('790a32d2-6172-5745-a98c-aacf9acaddc2', 'ddd61bd3-6d46-5333-9362-0f1b366ee6c7', 'Size', 0),
   ('bafa65c7-1ae4-51b0-a2dc-84fbfcbc2720', '07c4479c-7797-5bc0-a72a-4fa6dc5f8f2c', 'Size', 0),
-  ('67741ada-64e2-59e5-99a6-dca0288ced45', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'Diameter', 0)
+  ('67741ada-64e2-59e5-99a6-dca0288ced45', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'Diameter', 0),
+  ('66c384a8-1aef-58b7-bfc4-55d6a09ca1dc', '0a7b8d13-a835-577f-945a-11996dafeecc', 'Size', 0),
+  ('5ee5d0b9-b629-5b8f-b954-2d25f052023a', 'a7c3189b-64f7-537e-8b31-19777335d815', 'Color', 0),
+  ('f3efa5b3-e0f9-5f75-adc6-cff062809eba', '5029ee34-3737-5a70-8d01-4d0343882741', 'Size', 0),
+  ('c813019d-24e8-5aba-9c34-92f85e5097c7', 'e3715004-ac46-57f0-85f6-4c51e953bfc9', 'Capacity', 0),
+  ('79cc4b1f-3fe5-5991-8677-ea377c5b91f3', 'a9c01daf-19bf-56d5-b864-15f6bcbf581e', 'Size', 0),
+  ('532046e3-5022-5215-ab27-251047e3fa7e', '099ca9cf-1573-58c0-9f5d-3feea9721c4d', 'Color', 0),
+  ('0d8869d7-31ca-5732-97da-5b09874ac1ab', '36b70a89-8bdb-5b41-86dd-3115221a8e6f', 'Size', 0),
+  ('a1e12dc6-9c25-5e02-82fe-d6bf2ecb8558', 'b28ae653-0822-5ae8-aef3-31cee5e5b35a', 'Color', 0),
+  ('ea397ec5-1574-5d5e-995e-9a3d71b8ea87', 'fab9e51e-5d04-5282-9092-211bd0f2ae7f', 'Size', 0)
 on conflict (id) do nothing;
 
 insert into public.product_option_values (id, option_id, value, swatch_hex, position) values
@@ -142,7 +193,25 @@ insert into public.product_option_values (id, option_id, value, swatch_hex, posi
   ('becc5a49-43e3-5ba7-807d-b52bef71bc65', 'bafa65c7-1ae4-51b0-a2dc-84fbfcbc2720', 'Small', null, 0),
   ('bfe58e1b-6d18-5ded-ac0e-3c5476a4db0d', 'bafa65c7-1ae4-51b0-a2dc-84fbfcbc2720', 'Tall', null, 1),
   ('50227ca5-8957-5e02-a8c6-7347583b2073', '67741ada-64e2-59e5-99a6-dca0288ced45', '60 cm', null, 0),
-  ('b2b209cc-2c7a-589c-bae8-72463f2c73b1', '67741ada-64e2-59e5-99a6-dca0288ced45', '80 cm', null, 1)
+  ('b2b209cc-2c7a-589c-bae8-72463f2c73b1', '67741ada-64e2-59e5-99a6-dca0288ced45', '80 cm', null, 1),
+  ('0392e22c-fdcf-5daf-9c72-cfcb71ea04a1', '66c384a8-1aef-58b7-bfc4-55d6a09ca1dc', '5 × 8 ft', null, 0),
+  ('aa8e9dc8-4eb4-52d8-8682-42ca06781bb1', '66c384a8-1aef-58b7-bfc4-55d6a09ca1dc', '8 × 10 ft', null, 1),
+  ('9ff4d802-fbaf-5846-a684-57663f56710a', '5ee5d0b9-b629-5b8f-b954-2d25f052023a', 'Ivory', '#EFEAE1', 0),
+  ('c1874030-6597-5fa1-8170-91d4dc3b5224', '5ee5d0b9-b629-5b8f-b954-2d25f052023a', 'Rust', '#B25A33', 1),
+  ('3645fd85-7db5-5c26-9b57-a0288e0b85f3', 'f3efa5b3-e0f9-5f75-adc6-cff062809eba', 'Seats 6', null, 0),
+  ('85335092-4967-564d-ac61-273cb401da1b', 'f3efa5b3-e0f9-5f75-adc6-cff062809eba', 'Seats 8', null, 1),
+  ('eab94dad-ac3e-5561-a7ac-93833e21fa59', 'c813019d-24e8-5aba-9c34-92f85e5097c7', '4.5 qt', null, 0),
+  ('f69631a2-7273-51af-a45c-dd2d6b72a48b', 'c813019d-24e8-5aba-9c34-92f85e5097c7', '6.5 qt', null, 1),
+  ('7a9d1bc9-c03b-57be-8a59-6d3d766e953f', '79cc4b1f-3fe5-5991-8677-ea377c5b91f3', 'Full/Queen', null, 0),
+  ('559d28fc-34a0-50ff-8bc0-a5334ac3a4fd', '79cc4b1f-3fe5-5991-8677-ea377c5b91f3', 'King', null, 1),
+  ('7759ab1d-3962-5fab-9281-d7c95caeaff6', '532046e3-5022-5215-ab27-251047e3fa7e', 'Pearl', '#EDE9E1', 0),
+  ('3d10ee06-ec12-58ac-a3b0-17a4ebbe65cb', '532046e3-5022-5215-ab27-251047e3fa7e', 'Graphite', '#4A4A4C', 1),
+  ('9be48b77-9148-50dc-9a25-644cde258e88', '0d8869d7-31ca-5732-97da-5b09874ac1ab', 'Queen', null, 0),
+  ('71d8998d-5815-5ec5-9f8e-238c15141b13', '0d8869d7-31ca-5732-97da-5b09874ac1ab', 'King', null, 1),
+  ('edbb379a-1809-5cfa-a210-4f99732feba0', 'a1e12dc6-9c25-5e02-82fe-d6bf2ecb8558', 'White', '#F5F3EF', 0),
+  ('85475459-dfaa-50f0-8ef2-38bb51414967', 'a1e12dc6-9c25-5e02-82fe-d6bf2ecb8558', 'Charcoal', '#4B4A48', 1),
+  ('5ee01e36-56b1-55c4-baaa-6136d7f13000', 'ea397ec5-1574-5d5e-995e-9a3d71b8ea87', 'Small', null, 0),
+  ('faaf4a02-1600-57a8-a575-d519b304d5a9', 'ea397ec5-1574-5d5e-995e-9a3d71b8ea87', 'Large', null, 1)
 on conflict (id) do nothing;
 
 insert into public.product_variants (id, product_id, sku, title, price_cents, compare_at_price_cents, stock_quantity, image_id, position) values
@@ -194,7 +263,36 @@ insert into public.product_variants (id, product_id, sku, title, price_cents, co
   ('f8fe9508-2cb5-5819-aa86-2d53702ba492', 'a27d8056-bba4-5e51-b0bd-044c69c4809c', 'TID', 'Default', 8600, null, 7, null, 0),
   ('6fcd80f7-5a05-5682-94d1-4e8b2a0b9138', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'LIN-60CM', '60 cm', 28000, null, 6, null, 0),
   ('f0e57709-4edf-593b-9326-c95c94ff8f0a', 'f24c9acf-14ef-5ef2-a643-42bb82bdcc6f', 'LIN-80CM', '80 cm', 36000, null, 3, null, 1),
-  ('50f1fae8-04a8-5eaa-a93b-9380d39f5273', '26efccfd-b4e5-55a1-9cda-7b3f4c57001a', 'TRV', 'Default', 12000, null, 0, null, 0)
+  ('50f1fae8-04a8-5eaa-a93b-9380d39f5273', '26efccfd-b4e5-55a1-9cda-7b3f4c57001a', 'TRV', 'Default', 12000, null, 0, null, 0),
+  ('5d360c7c-87bd-5324-8298-e678ae8a657b', '0a7b8d13-a835-577f-945a-11996dafeecc', 'RUG-58FT', '5 × 8 ft', 42000, null, 7, null, 0),
+  ('74658e09-d759-580c-9272-3d28ae49c5b8', '0a7b8d13-a835-577f-945a-11996dafeecc', 'RUG-810FT', '8 × 10 ft', 78000, 92000, 3, null, 1),
+  ('69c511fa-e217-56b7-b1fa-d6d02de34390', 'b550857e-b092-5789-ba00-6b679fa3e7c5', 'PBL', 'Default', 96000, null, 4, null, 0),
+  ('9a52c68b-96da-518f-a134-24901906022c', '2912c8c6-113b-5e1a-8fe7-565f8d2be8ae', 'REE', 'Default', 138000, null, 3, null, 0),
+  ('2e86e330-5400-53fb-a987-8bbacc0f6d6f', 'a7c3189b-64f7-537e-8b31-19777335d815', 'TOV-IVO', 'Ivory', 5800, null, 24, null, 0),
+  ('61dc27cd-7e3b-587b-a515-3fc4e139e9dd', 'a7c3189b-64f7-537e-8b31-19777335d815', 'TOV-RUS', 'Rust', 5800, null, 14, null, 1),
+  ('ee1166a9-bb3a-5c35-b22a-75dcfe76dd79', '5029ee34-3737-5a70-8d01-4d0343882741', 'SAG-SEA6', 'Seats 6', 149000, null, 3, null, 0),
+  ('f899c2a4-3ae5-5114-b8d6-ce0d7819bdbd', '5029ee34-3737-5a70-8d01-4d0343882741', 'SAG-SEA8', 'Seats 8', 189000, null, 2, null, 1),
+  ('cfa2bfdb-2b4e-5aac-97df-f8e2a3bbeca3', 'e3715004-ac46-57f0-85f6-4c51e953bfc9', 'HTH-45QT', '4.5 qt', 17500, null, 10, null, 0),
+  ('9eed3806-1896-509b-8062-4dd7aebf5154', 'e3715004-ac46-57f0-85f6-4c51e953bfc9', 'HTH-65QT', '6.5 qt', 21500, null, 6, null, 1),
+  ('55c742be-4db8-586e-a501-47d485dbaa12', '55125f0c-2538-5e61-860b-b90c472b9e8c', 'DUN', 'Default', 6400, 7800, 18, null, 0),
+  ('0d769831-61a2-5177-bf1d-3b87f56110bb', 'b3d597fe-3c99-5a19-8a1c-79b82199a2db', 'ARI', 'Default', 5400, null, 20, null, 0),
+  ('65d36fcf-7bf0-5030-98b7-46d0d4e3bafa', 'a9c01daf-19bf-56d5-b864-15f6bcbf581e', 'CLD-FULQUE', 'Full/Queen', 22000, null, 9, null, 0),
+  ('74013e39-808a-5e5a-8c61-070791b98149', 'a9c01daf-19bf-56d5-b864-15f6bcbf581e', 'CLD-KIN', 'King', 26000, null, 5, null, 1),
+  ('82d72be2-890a-53c3-aa32-2990a02fa33f', '099ca9cf-1573-58c0-9f5d-3feea9721c4d', 'MUL-PEA', 'Pearl', 8900, null, 15, null, 0),
+  ('60bdeaf0-0303-51e9-bf02-169ff1d1ccd4', '099ca9cf-1573-58c0-9f5d-3feea9721c4d', 'MUL-GRA', 'Graphite', 8900, null, 0, null, 1),
+  ('352b48b4-b54c-52c2-81c2-dccf6275e3bf', '36b70a89-8bdb-5b41-86dd-3115221a8e6f', 'RHE-QUE', 'Queen', 169000, null, 3, null, 0),
+  ('3193c41c-813b-5b0b-801d-ed27b16be777', '36b70a89-8bdb-5b41-86dd-3115221a8e6f', 'RHE-KIN', 'King', 189000, null, 2, null, 1),
+  ('9086d16d-391e-5e9f-ac01-ff87b021456e', 'fafd7d8a-a238-562b-b1ee-a269eace2bc7', 'SOR', 'Default', 8600, null, 12, null, 0),
+  ('3bd7764c-14ca-532a-abe2-7cafa611f8f6', '6f0331b8-38fd-527d-a435-dab4278e85ca', 'CUR', 'Default', 9800, null, 14, null, 0),
+  ('243d8e85-32b8-5458-bfe3-3d21564924e8', '792005ac-7d53-59b9-a121-1c227f6dfa21', 'OLS', 'Default', 2400, null, 40, null, 0),
+  ('56dc080c-6b1a-5fea-9ea5-8202296e9e03', 'b28ae653-0822-5ae8-aef3-31cee5e5b35a', 'HTW-WHI', 'White', 3800, null, 25, null, 0),
+  ('4843a131-a4db-5890-92b8-f1568a52c560', 'b28ae653-0822-5ae8-aef3-31cee5e5b35a', 'HTW-CHA', 'Charcoal', 3800, null, 4, null, 1),
+  ('ec12878f-e377-508f-9f4b-e08af927af6d', '24daaeca-be9d-5063-bccc-927875c78355', 'ASH', 'Default', 7800, null, 9, null, 0),
+  ('b17c7f51-b9b5-5871-9d0a-1f28df824199', 'bbd10718-95bb-57aa-852f-011123f00025', 'ARC', 'Default', 34000, 39000, 5, null, 0),
+  ('e3fdee98-961e-58b9-9303-618e0993e114', '67ed9dc2-758d-5780-9472-d095ead17f01', 'BEE', 'Default', 3400, null, 30, null, 0),
+  ('f2097abb-cc47-5813-80cc-1a67a2b627fb', 'fab9e51e-5d04-5282-9092-211bd0f2ae7f', 'CEL-SMA', 'Small', 3600, null, 14, null, 0),
+  ('58f6bd77-f025-591f-8ba8-24a3c5c6ff7c', 'fab9e51e-5d04-5282-9092-211bd0f2ae7f', 'CEL-LAR', 'Large', 5800, null, 9, null, 1),
+  ('54a51ab7-9ac2-510a-82fd-e09054d87f49', 'ae717e2a-f8e8-57c8-8e0d-3bf391352ec6', 'CON', 'Default', 9600, 12000, 7, null, 0)
 on conflict (id) do nothing;
 
 insert into public.product_variant_options (variant_id, option_value_id) values
@@ -251,7 +349,25 @@ insert into public.product_variant_options (variant_id, option_value_id) values
   ('24f24ff8-8fc0-550b-a29f-541eeafcaded', 'becc5a49-43e3-5ba7-807d-b52bef71bc65'),
   ('9ea49206-dd49-530f-b6f9-439b9d667450', 'bfe58e1b-6d18-5ded-ac0e-3c5476a4db0d'),
   ('6fcd80f7-5a05-5682-94d1-4e8b2a0b9138', '50227ca5-8957-5e02-a8c6-7347583b2073'),
-  ('f0e57709-4edf-593b-9326-c95c94ff8f0a', 'b2b209cc-2c7a-589c-bae8-72463f2c73b1')
+  ('f0e57709-4edf-593b-9326-c95c94ff8f0a', 'b2b209cc-2c7a-589c-bae8-72463f2c73b1'),
+  ('5d360c7c-87bd-5324-8298-e678ae8a657b', '0392e22c-fdcf-5daf-9c72-cfcb71ea04a1'),
+  ('74658e09-d759-580c-9272-3d28ae49c5b8', 'aa8e9dc8-4eb4-52d8-8682-42ca06781bb1'),
+  ('2e86e330-5400-53fb-a987-8bbacc0f6d6f', '9ff4d802-fbaf-5846-a684-57663f56710a'),
+  ('61dc27cd-7e3b-587b-a515-3fc4e139e9dd', 'c1874030-6597-5fa1-8170-91d4dc3b5224'),
+  ('ee1166a9-bb3a-5c35-b22a-75dcfe76dd79', '3645fd85-7db5-5c26-9b57-a0288e0b85f3'),
+  ('f899c2a4-3ae5-5114-b8d6-ce0d7819bdbd', '85335092-4967-564d-ac61-273cb401da1b'),
+  ('cfa2bfdb-2b4e-5aac-97df-f8e2a3bbeca3', 'eab94dad-ac3e-5561-a7ac-93833e21fa59'),
+  ('9eed3806-1896-509b-8062-4dd7aebf5154', 'f69631a2-7273-51af-a45c-dd2d6b72a48b'),
+  ('65d36fcf-7bf0-5030-98b7-46d0d4e3bafa', '7a9d1bc9-c03b-57be-8a59-6d3d766e953f'),
+  ('74013e39-808a-5e5a-8c61-070791b98149', '559d28fc-34a0-50ff-8bc0-a5334ac3a4fd'),
+  ('82d72be2-890a-53c3-aa32-2990a02fa33f', '7759ab1d-3962-5fab-9281-d7c95caeaff6'),
+  ('60bdeaf0-0303-51e9-bf02-169ff1d1ccd4', '3d10ee06-ec12-58ac-a3b0-17a4ebbe65cb'),
+  ('352b48b4-b54c-52c2-81c2-dccf6275e3bf', '9be48b77-9148-50dc-9a25-644cde258e88'),
+  ('3193c41c-813b-5b0b-801d-ed27b16be777', '71d8998d-5815-5ec5-9f8e-238c15141b13'),
+  ('56dc080c-6b1a-5fea-9ea5-8202296e9e03', 'edbb379a-1809-5cfa-a210-4f99732feba0'),
+  ('4843a131-a4db-5890-92b8-f1568a52c560', '85475459-dfaa-50f0-8ef2-38bb51414967'),
+  ('f2097abb-cc47-5813-80cc-1a67a2b627fb', '5ee01e36-56b1-55c4-baaa-6136d7f13000'),
+  ('58f6bd77-f025-591f-8ba8-24a3c5c6ff7c', 'faaf4a02-1600-57a8-a575-d519b304d5a9')
 on conflict (variant_id, option_value_id) do nothing;
 
 insert into public.inventory_movements (id, variant_id, quantity_change, reason, note) values
@@ -300,7 +416,35 @@ insert into public.inventory_movements (id, variant_id, quantity_change, reason,
   ('6416d1e4-3389-5637-8662-18aba59044c2', '9ea49206-dd49-530f-b6f9-439b9d667450', 30, 'initial', 'Opening stock from seed data'),
   ('4d748956-0da6-5475-a550-fd53dd33f328', 'f8fe9508-2cb5-5819-aa86-2d53702ba492', 7, 'initial', 'Opening stock from seed data'),
   ('b2bdab7c-a6c2-5694-aaed-d136394aec53', '6fcd80f7-5a05-5682-94d1-4e8b2a0b9138', 6, 'initial', 'Opening stock from seed data'),
-  ('0a9984bc-a559-5d98-931b-72c9ee9ec88e', 'f0e57709-4edf-593b-9326-c95c94ff8f0a', 3, 'initial', 'Opening stock from seed data')
+  ('0a9984bc-a559-5d98-931b-72c9ee9ec88e', 'f0e57709-4edf-593b-9326-c95c94ff8f0a', 3, 'initial', 'Opening stock from seed data'),
+  ('19188bb8-1f69-5006-9fc8-0327fa026060', '5d360c7c-87bd-5324-8298-e678ae8a657b', 7, 'initial', 'Opening stock from seed data'),
+  ('f6755bb3-e192-5c38-9889-762cbaa649c3', '74658e09-d759-580c-9272-3d28ae49c5b8', 3, 'initial', 'Opening stock from seed data'),
+  ('0a664424-54b1-5b12-8f58-152b05d2d63a', '69c511fa-e217-56b7-b1fa-d6d02de34390', 4, 'initial', 'Opening stock from seed data'),
+  ('537dda3b-23d6-594c-9a61-c21d836d5e7e', '9a52c68b-96da-518f-a134-24901906022c', 3, 'initial', 'Opening stock from seed data'),
+  ('55c10d19-8a87-5312-90cb-ec37c9867929', '2e86e330-5400-53fb-a987-8bbacc0f6d6f', 24, 'initial', 'Opening stock from seed data'),
+  ('a29c0156-5a97-5863-8b1c-a83ee071e252', '61dc27cd-7e3b-587b-a515-3fc4e139e9dd', 14, 'initial', 'Opening stock from seed data'),
+  ('d1c8bb3e-c7ca-54df-9ccc-1e5c3db622df', 'ee1166a9-bb3a-5c35-b22a-75dcfe76dd79', 3, 'initial', 'Opening stock from seed data'),
+  ('b12abc87-3118-51f4-a34d-8a71d15a6115', 'f899c2a4-3ae5-5114-b8d6-ce0d7819bdbd', 2, 'initial', 'Opening stock from seed data'),
+  ('63230e01-1122-593d-bf18-0379e52b0949', 'cfa2bfdb-2b4e-5aac-97df-f8e2a3bbeca3', 10, 'initial', 'Opening stock from seed data'),
+  ('9b849020-5f23-5b9f-b782-988d8daf730c', '9eed3806-1896-509b-8062-4dd7aebf5154', 6, 'initial', 'Opening stock from seed data'),
+  ('4f841790-1e4d-5fff-95b2-7e2b8ea76329', '55c742be-4db8-586e-a501-47d485dbaa12', 18, 'initial', 'Opening stock from seed data'),
+  ('fda1d754-88aa-5f03-b8c1-f409b3050aa9', '0d769831-61a2-5177-bf1d-3b87f56110bb', 20, 'initial', 'Opening stock from seed data'),
+  ('a11e7695-4897-5b43-befb-9b09333c8739', '65d36fcf-7bf0-5030-98b7-46d0d4e3bafa', 9, 'initial', 'Opening stock from seed data'),
+  ('9545046d-d95a-5105-8f1f-53f561be811f', '74013e39-808a-5e5a-8c61-070791b98149', 5, 'initial', 'Opening stock from seed data'),
+  ('f0438d00-3e7e-5f76-86a6-5b521234137e', '82d72be2-890a-53c3-aa32-2990a02fa33f', 15, 'initial', 'Opening stock from seed data'),
+  ('3940c58d-5be0-5bc8-98fd-f4dcd45f67a7', '352b48b4-b54c-52c2-81c2-dccf6275e3bf', 3, 'initial', 'Opening stock from seed data'),
+  ('34d3f1ff-a6bf-5c6e-b369-0f0984604caa', '3193c41c-813b-5b0b-801d-ed27b16be777', 2, 'initial', 'Opening stock from seed data'),
+  ('a224ce93-3ac8-58f7-b257-be9d6be1a5a5', '9086d16d-391e-5e9f-ac01-ff87b021456e', 12, 'initial', 'Opening stock from seed data'),
+  ('beccb451-60d7-57c0-a2a1-7878525023c3', '3bd7764c-14ca-532a-abe2-7cafa611f8f6', 14, 'initial', 'Opening stock from seed data'),
+  ('dcb811cc-da3d-57a4-a2e8-24f99a1c7589', '243d8e85-32b8-5458-bfe3-3d21564924e8', 40, 'initial', 'Opening stock from seed data'),
+  ('39460f08-68c0-56fa-bf09-68c47445244c', '56dc080c-6b1a-5fea-9ea5-8202296e9e03', 25, 'initial', 'Opening stock from seed data'),
+  ('9b9c8111-045c-5591-968f-cf1b7d615d6b', '4843a131-a4db-5890-92b8-f1568a52c560', 4, 'initial', 'Opening stock from seed data'),
+  ('70da0128-6a72-5d0f-8fb5-1d4c20c61953', 'ec12878f-e377-508f-9f4b-e08af927af6d', 9, 'initial', 'Opening stock from seed data'),
+  ('ae748983-229c-5937-86d0-bc2813c2d55f', 'b17c7f51-b9b5-5871-9d0a-1f28df824199', 5, 'initial', 'Opening stock from seed data'),
+  ('4f8b9a9e-45f7-506d-a20b-d6a8d3d1954e', 'e3fdee98-961e-58b9-9303-618e0993e114', 30, 'initial', 'Opening stock from seed data'),
+  ('b53221da-6e4c-566e-82c2-4034c8983b5e', 'f2097abb-cc47-5813-80cc-1a67a2b627fb', 14, 'initial', 'Opening stock from seed data'),
+  ('1df84cab-f068-5772-9b84-0651b5d5b44c', '58f6bd77-f025-591f-8ba8-24a3c5c6ff7c', 9, 'initial', 'Opening stock from seed data'),
+  ('c522555a-11ab-5e90-a180-fb77e614ebbd', '54a51ab7-9ac2-510a-82fd-e09054d87f49', 7, 'initial', 'Opening stock from seed data')
 on conflict (id) do nothing;
 
 insert into public.discount_codes (id, code, description, type, value, min_subtotal_cents, max_redemptions, redemption_count, starts_at, ends_at) values

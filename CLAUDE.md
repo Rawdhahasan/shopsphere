@@ -25,6 +25,10 @@ Full-stack e-commerce portfolio project. Read `README.md`, `docs/ARCHITECTURE.md
 - Change hosted Supabase settings via `supabase/config.toml` + `supabase config push`. Preview first and keep the file in sync with the live project, or the push silently reverts live settings.
 - Schema changes go in a NEW migration file. Add or extend tests in `tests/db/schema.test.ts` for any new rule.
 - UI uses the primitives in `src/components/ui` and the tokens in `src/app/globals.css`.
+- Catalog and settings writes call `updateTag(CATALOG_TAG)` so cached storefront pages refresh.
+- Checkout must work in both modes: Stripe (an `sk_test_` key is set) and demo mode (no key). Orders are created and paid only through the `reserve_order` / `mark_order_paid` / `release_order` / `refund_order` functions.
+- Charts: one hue per series, columns for discrete daily data, a table view for every chart, and run the dataviz palette validator on any new chart colour.
+- Before pushing, run the full check in a clean checkout without `.env.local` (CI has no Supabase settings): code that reaches Supabase must return early when `isSupabaseConfigured()` is false.
 
 ## Commands
 

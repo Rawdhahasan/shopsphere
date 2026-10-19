@@ -38,10 +38,13 @@ export function AddressForm({
   action,
   defaults,
   submitLabel,
+  returnTo,
 }: {
   action: FormAction;
   defaults: AddressDefaults;
   submitLabel: string;
+  /** Where to go after saving, e.g. back to checkout. Only "/checkout" is honoured. */
+  returnTo?: "/checkout";
 }) {
   const [state, formAction, pending] = useActionState<FormState, FormData>(action, {
     status: "idle",
@@ -53,6 +56,7 @@ export function AddressForm({
   return (
     <form action={formAction} className="max-w-2xl space-y-5" noValidate>
       <FormAlert state={state} />
+      {returnTo && <input type="hidden" name="returnTo" value={returnTo} />}
       <div className="grid gap-5 sm:grid-cols-2">
         <FormField label="Full name" error={errors.fullName}>
           <Input name="fullName" autoComplete="name" required defaultValue={v("fullName")} />

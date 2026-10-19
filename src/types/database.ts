@@ -949,12 +949,32 @@ export type Database = {
         }
         Returns: number
       }
+      get_product_reviews: {
+        Args: { p_product_id: string }
+        Returns: {
+          author_name: string
+          body: string
+          created_at: string
+          id: string
+          is_verified_purchase: boolean
+          rating: number
+          title: string
+        }[]
+      }
       has_purchased_product: {
         Args: { p_product_id: string }
         Returns: boolean
       }
       is_admin: { Args: never; Returns: boolean }
       is_privileged_context: { Args: never; Returns: boolean }
+      mark_order_paid: {
+        Args: {
+          p_checkout_session_id?: string
+          p_order_id: string
+          p_payment_intent_id?: string
+        }
+        Returns: boolean
+      }
       refresh_product_rating: {
         Args: { p_product_id: string }
         Returns: undefined
@@ -962,6 +982,34 @@ export type Database = {
       refresh_product_variant_stats: {
         Args: { p_product_id: string }
         Returns: undefined
+      }
+      refund_order: {
+        Args: { p_note?: string; p_order_id: string }
+        Returns: boolean
+      }
+      release_order: {
+        Args: { p_note?: string; p_order_id: string }
+        Returns: boolean
+      }
+      reserve_order: {
+        Args: {
+          p_discount_cents: number
+          p_discount_code: string
+          p_discount_code_id: string
+          p_email: string
+          p_lines: Json
+          p_reservation_expires_at: string
+          p_shipping_address: Json
+          p_shipping_cents: number
+          p_subtotal_cents: number
+          p_tax_cents: number
+          p_total_cents: number
+          p_user_id: string
+        }
+        Returns: {
+          order_id: string
+          order_number: string
+        }[]
       }
     }
     Enums: {

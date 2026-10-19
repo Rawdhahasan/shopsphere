@@ -15,33 +15,52 @@ Every photo was:
 - matched to a fictional ShopSphere product. The photos show similar items, not the
   photographers' own products, and product names, descriptions and prices are invented.
 
-| Used for                                                           | Photographer         | Unsplash photo                                         |
-| ------------------------------------------------------------------ | -------------------- | ------------------------------------------------------ |
-| Living category, Lune Two-Seater Sofa                              | Aleksandra Dementeva | [pYqXT6hoRbQ](https://unsplash.com/photos/pYqXT6hoRbQ) |
-| Kitchen & Dining category, Terra Stoneware Dinner Plates, Set of 4 | Aleksey Cherenkevich | [fMErCi1ld3Q](https://unsplash.com/photos/fMErCi1ld3Q) |
-| Bedroom category, Stonewashed Linen Duvet Cover                    | Deconovo             | [gVKmonDbotU](https://unsplash.com/photos/gVKmonDbotU) |
-| Bath category, Cloud Cotton Bathrobe                               | Grace Anne Bobadilla | [rv312P5_Egw](https://unsplash.com/photos/rv312P5_Egw) |
-| Decor category, Ridge Ceramic Vase                                 | Mathilde Langevin    | [WUrXahlyjBo](https://unsplash.com/photos/WUrXahlyjBo) |
-| Arden Lounge Chair                                                 | SCOPIC LTD           | [NLlWwR4d3qU](https://unsplash.com/photos/NLlWwR4d3qU) |
-| Fringed Cotton Throw                                               | Costa Live           | [G3ljETYuoo8](https://unsplash.com/photos/G3ljETYuoo8) |
-| Halden Nesting Tables                                              | Sam Moghadam         | [xej3GOtAQ-o](https://unsplash.com/photos/xej3GOtAQ-o) |
-| Pleat Floor Lamp                                                   | John Black           | [RV9T8txb2uY](https://unsplash.com/photos/RV9T8txb2uY) |
-| Terra Stoneware Dinner Plates, Set of 4                            | Callum Shaw          | [Vrztewqmi4Q](https://unsplash.com/photos/Vrztewqmi4Q) |
-| Kiln Stoneware Tumbler                                             | Adam Rasheed         | [BGEqCc-bQHg](https://unsplash.com/photos/BGEqCc-bQHg) |
-| Kiln Stoneware Tumbler                                             | Adam Rasheed         | [n9I_Xp7nyCk](https://unsplash.com/photos/n9I_Xp7nyCk) |
-| Pinch Espresso Cups, Set of 4                                      | Diana Light          | [u_jt9A7FADk](https://unsplash.com/photos/u_jt9A7FADk) |
-| Olive Wood Serving Board                                           | Mockup Graphics      | [OOv2sCKwYAA](https://unsplash.com/photos/OOv2sCKwYAA) |
-| Ribbed Glass Carafe                                                | Elena Golubeva       | [tU-7tQgL-eU](https://unsplash.com/photos/tU-7tQgL-eU) |
-| Washed Linen Napkins, Set of 4                                     | Svitlana             | [HbiRi1Owk9k](https://unsplash.com/photos/HbiRi1Owk9k) |
-| Stonewashed Linen Duvet Cover                                      | Kateryna Hliznitsova | [2NDtPNiLcD0](https://unsplash.com/photos/2NDtPNiLcD0) |
-| Stonewashed Linen Duvet Cover                                      | Luca Laurence        | [FseXc3OsIic](https://unsplash.com/photos/FseXc3OsIic) |
-| Organic Cotton Sheet Set                                           | Sincerely Media      | [9nhxEa3PK30](https://unsplash.com/photos/9nhxEa3PK30) |
-| Alder Bedside Table                                                | Puscas Adryan        | [5IVx5mvURJw](https://unsplash.com/photos/5IVx5mvURJw) |
-| Halo Table Lamp                                                    | Bhautik Patel        | [VdrwI_63-Po](https://unsplash.com/photos/VdrwI_63-Po) |
-| Plush Cotton Bath Towel                                            | MADEINEGYPT.CA       | [46g2RzaaxJ0](https://unsplash.com/photos/46g2RzaaxJ0) |
-| Plush Cotton Bath Towel                                            | the blowup           | [4dUC7Fine5g](https://unsplash.com/photos/4dUC7Fine5g) |
-| Chenille Bath Mat                                                  | Almas Salakhov       | [sICX7aw6gls](https://unsplash.com/photos/sICX7aw6gls) |
-| Ribbed Glass Soap Dispenser                                        | Laura Chouette       | [7gYlkoV1e1A](https://unsplash.com/photos/7gYlkoV1e1A) |
-| Ribbed Pillar Candle                                               | Hanna Shapovalova    | [_MuRSNbZlGU](https://unsplash.com/photos/_MuRSNbZlGU) |
-| Tidal Woven Baskets, Set of 3                                      | Sina Saadatmand      | [siGGsRqd9z4](https://unsplash.com/photos/siGGsRqd9z4) |
-| Linden Round Mirror                                                | Spacejoy             | [g3KbcDWrBUM](https://unsplash.com/photos/g3KbcDWrBUM) |
+| Used for                                                           | Photographer          | Unsplash photo                                         |
+| ------------------------------------------------------------------ | --------------------- | ------------------------------------------------------ |
+| Living category, Lune Two-Seater Sofa                              | Aleksandra Dementeva  | [pYqXT6hoRbQ](https://unsplash.com/photos/pYqXT6hoRbQ) |
+| Kitchen & Dining category, Terra Stoneware Dinner Plates, Set of 4 | Aleksey Cherenkevich  | [fMErCi1ld3Q](https://unsplash.com/photos/fMErCi1ld3Q) |
+| Bedroom category, Stonewashed Linen Duvet Cover                    | Deconovo              | [gVKmonDbotU](https://unsplash.com/photos/gVKmonDbotU) |
+| Bath category, Cloud Cotton Bathrobe                               | Grace Anne Bobadilla  | [rv312P5_Egw](https://unsplash.com/photos/rv312P5_Egw) |
+| Decor category, Ridge Ceramic Vase                                 | Mathilde Langevin     | [WUrXahlyjBo](https://unsplash.com/photos/WUrXahlyjBo) |
+| Arden Lounge Chair                                                 | SCOPIC LTD            | [NLlWwR4d3qU](https://unsplash.com/photos/NLlWwR4d3qU) |
+| Fringed Cotton Throw                                               | Costa Live            | [G3ljETYuoo8](https://unsplash.com/photos/G3ljETYuoo8) |
+| Halden Nesting Tables                                              | Sam Moghadam          | [xej3GOtAQ-o](https://unsplash.com/photos/xej3GOtAQ-o) |
+| Pleat Floor Lamp                                                   | John Black            | [RV9T8txb2uY](https://unsplash.com/photos/RV9T8txb2uY) |
+| Terra Stoneware Dinner Plates, Set of 4                            | Callum Shaw           | [Vrztewqmi4Q](https://unsplash.com/photos/Vrztewqmi4Q) |
+| Kiln Stoneware Tumbler                                             | Adam Rasheed          | [BGEqCc-bQHg](https://unsplash.com/photos/BGEqCc-bQHg) |
+| Kiln Stoneware Tumbler                                             | Adam Rasheed          | [n9I_Xp7nyCk](https://unsplash.com/photos/n9I_Xp7nyCk) |
+| Pinch Espresso Cups, Set of 4                                      | Diana Light           | [u_jt9A7FADk](https://unsplash.com/photos/u_jt9A7FADk) |
+| Olive Wood Serving Board                                           | Mockup Graphics       | [OOv2sCKwYAA](https://unsplash.com/photos/OOv2sCKwYAA) |
+| Ribbed Glass Carafe                                                | Elena Golubeva        | [tU-7tQgL-eU](https://unsplash.com/photos/tU-7tQgL-eU) |
+| Washed Linen Napkins, Set of 4                                     | Svitlana              | [HbiRi1Owk9k](https://unsplash.com/photos/HbiRi1Owk9k) |
+| Stonewashed Linen Duvet Cover                                      | Kateryna Hliznitsova  | [2NDtPNiLcD0](https://unsplash.com/photos/2NDtPNiLcD0) |
+| Stonewashed Linen Duvet Cover                                      | Luca Laurence         | [FseXc3OsIic](https://unsplash.com/photos/FseXc3OsIic) |
+| Organic Cotton Sheet Set                                           | Sincerely Media       | [9nhxEa3PK30](https://unsplash.com/photos/9nhxEa3PK30) |
+| Alder Bedside Table                                                | Puscas Adryan         | [5IVx5mvURJw](https://unsplash.com/photos/5IVx5mvURJw) |
+| Halo Table Lamp                                                    | Bhautik Patel         | [VdrwI_63-Po](https://unsplash.com/photos/VdrwI_63-Po) |
+| Plush Cotton Bath Towel                                            | MADEINEGYPT.CA        | [46g2RzaaxJ0](https://unsplash.com/photos/46g2RzaaxJ0) |
+| Plush Cotton Bath Towel, Waffle Hand Towels, Set of 2              | the blowup            | [4dUC7Fine5g](https://unsplash.com/photos/4dUC7Fine5g) |
+| Chenille Bath Mat                                                  | Almas Salakhov        | [sICX7aw6gls](https://unsplash.com/photos/sICX7aw6gls) |
+| Ribbed Glass Soap Dispenser                                        | Laura Chouette        | [7gYlkoV1e1A](https://unsplash.com/photos/7gYlkoV1e1A) |
+| Ribbed Pillar Candle                                               | Hanna Shapovalova     | [_MuRSNbZlGU](https://unsplash.com/photos/_MuRSNbZlGU) |
+| Tidal Woven Baskets, Set of 3                                      | Sina Saadatmand       | [siGGsRqd9z4](https://unsplash.com/photos/siGGsRqd9z4) |
+| Linden Round Mirror                                                | Spacejoy              | [g3KbcDWrBUM](https://unsplash.com/photos/g3KbcDWrBUM) |
+| Ivory Fringed Wool Rug                                             | Erfan Banaei          | [p00r5JmTMpY](https://unsplash.com/photos/p00r5JmTMpY) |
+| Pebble Walnut Coffee Table                                         | Clay Banks            | [T55TD7ZUo0c](https://unsplash.com/photos/T55TD7ZUo0c) |
+| Reed Fluted Oak Sideboard                                          | Imani Bahati          | [UrQeWGobTnI](https://unsplash.com/photos/UrQeWGobTnI) |
+| Tove Linen Cushion                                                 | Veronika Martinelli   | [jerLmkgxQhA](https://unsplash.com/photos/jerLmkgxQhA) |
+| Saga Oak Dining Table                                              | Jonathan Borba        | [Uaf1g970Hrk](https://unsplash.com/photos/Uaf1g970Hrk) |
+| Hearth Enameled Dutch Oven                                         | NATHAN MULLET         | [fHf8QYOS5q8](https://unsplash.com/photos/fHf8QYOS5q8) |
+| Dune Stoneware Mugs, Set of 4                                      | Katja Vogt            | [CipURjPCXOo](https://unsplash.com/photos/CipURjPCXOo) |
+| Aria Hand-Blown Wine Glasses, Set of 2                             | Ambitious Studio*     | Rick Barrett                                           | [WT_r3dUwx6I](https://unsplash.com/photos/WT_r3dUwx6I) |
+| Cloudrest Duvet Insert                                             | jurien huggins        | [dEUYgSzEosc](https://unsplash.com/photos/dEUYgSzEosc) |
+| Mulberry Silk Pillowcase                                           | Trude Jonsson Stangel | [1MebQd9i6SI](https://unsplash.com/photos/1MebQd9i6SI) |
+| Rhea Oak Spindle Bed                                               | Taylor Friehl         | [-_GU-VDIHnk](https://unsplash.com/photos/-_GU-VDIHnk) |
+| Sora Seagrass Laundry Basket                                       | Sarah Dorweiler       | [7tFlUFGa7Dk](https://unsplash.com/photos/7tFlUFGa7Dk) |
+| Waffle Weave Shower Curtain                                        | Joyful                | [VV_ioP2riow](https://unsplash.com/photos/VV_ioP2riow) |
+| Pure Olive Bar Soap, Set of 3                                      | Sincerely Media       | [sbZQn-AYHNQ](https://unsplash.com/photos/sbZQn-AYHNQ) |
+| Ash Wood Bath Tray                                                 | Eugenia Pan'kiv       | [rLv41IRXShE](https://unsplash.com/photos/rLv41IRXShE) |
+| Arch Floor Mirror                                                  | Mathilde Langevin     | [qwdCMprHWKg](https://unsplash.com/photos/qwdCMprHWKg) |
+| Beeswax Taper Candles, Set of 6                                    | Annie Spratt          | [2S7vOqq6f_U](https://unsplash.com/photos/2S7vOqq6f_U) |
+| Celadon Bud Planter                                                | Andy Crone            | [SHiqkFW5VO4](https://unsplash.com/photos/SHiqkFW5VO4) |
+| Cone Brass Candlesticks, Set of 3                                  | Noyo creatif          | [mwrMvNJYic8](https://unsplash.com/photos/mwrMvNJYic8) |

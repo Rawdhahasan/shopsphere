@@ -33,8 +33,11 @@ export function SiteFooter() {
       </Container>
       <div className="border-t border-line">
         <Container className="flex flex-col gap-2 py-6 text-xs text-ink-muted sm:flex-row sm:justify-between">
-          <p>© {siteConfig.name}. A portfolio project.</p>
-          <p>Payments run in Stripe test mode. No real charges are made.</p>
+          <p>
+            © 2026 {siteConfig.name} · Created by{" "}
+            <span className="font-medium text-ink-soft">Rawdha Hasan</span>
+          </p>
+          <p>A portfolio project. Payments run in Stripe test mode; no real charges are made.</p>
         </Container>
       </div>
     </footer>
