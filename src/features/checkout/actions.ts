@@ -1,6 +1,8 @@
 "use server";
 
+import { updateTag } from "next/cache";
 import { redirect } from "next/navigation";
+import { CATALOG_TAG } from "@/features/catalog/queries";
 import { z } from "zod";
 import { requireUser } from "@/lib/auth/session";
 import { getPublicEnv } from "@/lib/env/public";
@@ -92,6 +94,8 @@ export async function placeOrder(_prev: FormState, formData: FormData): Promise<
   });
   const order = reserved?.[0];
   if (error || !order) return errorState(friendlyReserveError(error?.message ?? "", cart.items));
+  // Stock changed: product pages show fresh availability on the next visit.
+  updateTag(CATALOG_TAG);
 
   // Demo mode: no Stripe key yet, so the order is confirmed without taking payment.
   if (!isStripeConfigured()) {
