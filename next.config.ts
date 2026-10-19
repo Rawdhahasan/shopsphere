@@ -12,6 +12,10 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   poweredByHeader: false,
+  experimental: {
+    // Product photos are uploaded one per request; Vercel allows at most 4.5 MB per request.
+    serverActions: { bodySizeLimit: "4mb" },
+  },
   images: {
     // Product images are served from Supabase Storage public buckets.
     remotePatterns: [
