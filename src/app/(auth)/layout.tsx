@@ -13,7 +13,7 @@ export default function AuthLayout({ children }: LayoutProps<"/">) {
           <div className="mx-auto w-full max-w-sm animate-fade-up">{children}</div>
         </div>
         <p className="text-xs text-ink-faint">
-          Payments run in Stripe test mode. No real charges are made.
+          Created by Rawdha Hasan · Payments run in Stripe test mode. No real charges are made.
         </p>
       </main>
       <aside aria-label="About ShopSphere" className="relative hidden bg-sand lg:block">
