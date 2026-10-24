@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useEffect, useState, type ReactNode } from "react";
+import { Suspense, useCallback, useEffect, useState, type ReactNode } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Heart, Menu, Search, X } from "lucide-react";
@@ -34,8 +34,10 @@ function MainNavLinks({ pathname }: { pathname: string | null }) {
  * Reading the URL suspends on pages with unknown dynamic params, so the active
  * highlight streams in while the plain links are part of the static shell.
  */
-function MainNavWithActive() {
-  return <MainNavLinks pathname={usePathname()} />;
+function MainNavWithActive({ onNavigate }: { onNavigate: () => void }) {
+  const pathname = usePathname();
+  useEffect(() => onNavigate(), [onNavigate, pathname]);
+  return <MainNavLinks pathname={pathname} />;
 }
 
 /**
@@ -52,16 +54,17 @@ export function SiteHeader({
   announcement: string;
 }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const closeMenu = () => setMenuOpen(false);
+  const closeMenu = useCallback(() => setMenuOpen(false), []);
 
   useEffect(() => {
     if (!menuOpen) return;
+    const previousOverflow = document.body.style.overflow;
     const onKeyDown = (event: KeyboardEvent) => event.key === "Escape" && setMenuOpen(false);
     document.addEventListener("keydown", onKeyDown);
     document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", onKeyDown);
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [menuOpen]);
 
@@ -86,7 +89,7 @@ export function SiteHeader({
 
         <nav aria-label="Main" className="hidden flex-1 lg:block">
           <Suspense fallback={<MainNavLinks pathname={null} />}>
-            <MainNavWithActive />
+            <MainNavWithActive onNavigate={closeMenu} />
           </Suspense>
         </nav>
 
@@ -109,9 +112,9 @@ export function SiteHeader({
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-[6.25rem] bottom-0 animate-fade-in bg-canvas lg:hidden"
+          className="fixed inset-x-0 top-[6.25rem] bottom-0 bg-canvas lg:hidden"
         >
-          <nav aria-label="Mobile">
+          <nav aria-label="Mobile" className="animate-fade-in">
             <Container>
               <ul className="divide-y divide-line">
                 {siteConfig.storeNav.map((item) => (
