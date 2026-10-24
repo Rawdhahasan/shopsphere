@@ -34,7 +34,10 @@ describe("SiteHeader", () => {
     await userEvent.click(screen.getByRole("button", { name: "Open menu" }));
     expect(document.body.style.overflow).toBe("hidden");
     expect(screen.getByRole("navigation", { name: "Mobile" })).toBeInTheDocument();
-    expect(document.getElementById("mobile-menu")).not.toHaveClass("animate-fade-in");
+    const menuPanel = document.getElementById("mobile-menu");
+    expect(menuPanel).not.toHaveClass("animate-fade-in");
+    expect(menuPanel?.parentElement?.tagName).not.toBe("HEADER");
+    expect(menuPanel).toHaveClass("fixed", "z-50", "bg-canvas");
     expect(screen.getByRole("navigation", { name: "Mobile" })).toHaveClass("animate-fade-in");
 
     routerState.pathname = "/products";

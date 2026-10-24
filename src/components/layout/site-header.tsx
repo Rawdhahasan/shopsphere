@@ -69,50 +69,52 @@ export function SiteHeader({
   }, [menuOpen]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
-      <div className="bg-ink py-2 text-center text-xs tracking-wide text-canvas">
-        {announcement}
-      </div>
-      <Container className="flex h-16 items-center gap-4 lg:h-20">
-        <button
-          type="button"
-          className={cn(iconLink, "-ml-2 lg:hidden")}
-          aria-label={menuOpen ? "Close menu" : "Open menu"}
-          aria-expanded={menuOpen}
-          aria-controls="mobile-menu"
-          onClick={() => setMenuOpen((open) => !open)}
-        >
-          {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
-        </button>
-
-        <Logo className="lg:mr-6" />
-
-        <nav aria-label="Main" className="hidden flex-1 lg:block">
-          <Suspense fallback={<MainNavLinks pathname={null} />}>
-            <MainNavWithActive onNavigate={closeMenu} />
-          </Suspense>
-        </nav>
-
-        <div className="ml-auto flex items-center gap-1">
-          <Link href="/search" className={iconLink} aria-label="Search">
-            <Search className="size-5" strokeWidth={1.75} />
-          </Link>
-          <Link
-            href="/wishlist"
-            className={cn(iconLink, "hidden sm:inline-flex")}
-            aria-label="Wishlist"
-          >
-            <Heart className="size-5" strokeWidth={1.75} />
-          </Link>
-          {account}
-          {cart}
+    <>
+      <header className="sticky top-0 z-40 border-b border-line bg-canvas/90 backdrop-blur-md">
+        <div className="bg-ink py-2 text-center text-xs tracking-wide text-canvas">
+          {announcement}
         </div>
-      </Container>
+        <Container className="flex h-16 items-center gap-4 lg:h-20">
+          <button
+            type="button"
+            className={cn(iconLink, "-ml-2 lg:hidden")}
+            aria-label={menuOpen ? "Close menu" : "Open menu"}
+            aria-expanded={menuOpen}
+            aria-controls="mobile-menu"
+            onClick={() => setMenuOpen((open) => !open)}
+          >
+            {menuOpen ? <X className="size-5" /> : <Menu className="size-5" />}
+          </button>
+
+          <Logo className="lg:mr-6" />
+
+          <nav aria-label="Main" className="hidden flex-1 lg:block">
+            <Suspense fallback={<MainNavLinks pathname={null} />}>
+              <MainNavWithActive onNavigate={closeMenu} />
+            </Suspense>
+          </nav>
+
+          <div className="ml-auto flex items-center gap-1">
+            <Link href="/search" className={iconLink} aria-label="Search">
+              <Search className="size-5" strokeWidth={1.75} />
+            </Link>
+            <Link
+              href="/wishlist"
+              className={cn(iconLink, "hidden sm:inline-flex")}
+              aria-label="Wishlist"
+            >
+              <Heart className="size-5" strokeWidth={1.75} />
+            </Link>
+            {account}
+            {cart}
+          </div>
+        </Container>
+      </header>
 
       {menuOpen && (
         <div
           id="mobile-menu"
-          className="fixed inset-x-0 top-[6.25rem] bottom-0 bg-canvas lg:hidden"
+          className="fixed inset-x-0 top-[6.25rem] bottom-0 z-50 bg-canvas lg:hidden"
         >
           <nav aria-label="Mobile" className="animate-fade-in">
             <Container>
@@ -143,6 +145,6 @@ export function SiteHeader({
           </nav>
         </div>
       )}
-    </header>
+    </>
   );
 }
